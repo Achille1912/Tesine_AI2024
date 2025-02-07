@@ -1,80 +1,3 @@
-# """
-# Mountain scenario implementation.
-# Goal: Optimize network topology in mountainous terrain.
-# """
-
-# from typing import List, Tuple, Optional, Dict
-# from src.models.network import WirelessNetwork
-# # from src.algorithms.kruskal import KruskalMST
-# # from src.algorithms.prim import PrimMST
-
-# def solve_mountain_scenario(network: WirelessNetwork,
-#                           algorithm: str = 'kruskal',
-#                           constraints: Dict = None) -> Optional[List[Tuple[int, int]]]:
-#     """
-#     Find optimal MST considering mountainous terrain.
-    
-#     Args:
-#         network: The wireless network
-#         algorithm: MST algorithm to use ('kruskal' or 'prim')
-#         constraints: Dictionary of constraints including:
-#                     - max_link_distance: Maximum allowed link distance
-#                     - elevation_factor: Impact of elevation differences
-                    
-#     Returns:
-#         Optional[List[Tuple[int, int]]]: MST edges if found
-#     """
-#     # TODO: Student Implementation
-    
-#     # 1. Apply elevation-based cost adjustments
-#     # - Consider elevation differences between nodes
-#     # - Adjust costs based on terrain difficulty
-#     # - Account for weather impact at high altitudes
-    
-#     # 2. Initialize appropriate MST algorithm
-#     # if algorithm == 'kruskal':
-#     #     mst_solver = KruskalMST(network)
-#     # else:
-#     #     mst_solver = PrimMST(network)
-    
-#     # 3. Consider:
-#     # - Minimize extreme elevation changes
-#     # - Account for terrain difficulty
-#     # - Ensure reliable connections
-#     # - Stay within distance constraints
-    
-#     # 4. Find and validate MST solution
-#     # mst_edges = mst_solver.find_mst()
-#     # if validate_mountain_solution(network, mst_edges, constraints):
-#     #     return mst_edges
-    
-#     return None
-
-# def validate_mountain_solution(network: WirelessNetwork,
-#                              mst_edges: List[Tuple[int, int]],
-#                              constraints: Dict) -> bool:
-#     """Validate MST solution for mountain scenario."""
-#     if not mst_edges:
-#         return False
-        
-#     max_link_distance = constraints.get('max_link_distance', float('inf'))
-#     elevation_factor = constraints.get('elevation_factor', 1.5)
-    
-#     for edge in mst_edges:
-#         # Check distance constraint
-#         node1 = network.nodes[edge[0]]
-#         node2 = network.nodes[edge[1]]
-        
-#         if node1.distance_to(node2) > max_link_distance:
-#             return False
-            
-#         # Check elevation difference
-#         if node1.elevation_difference(node2) * elevation_factor > max_link_distance:
-#             return False
-    
-#     return True
-
-
 """
 Mountain scenario implementation.
 Goal: Optimize network topology in mountainous terrain.
@@ -85,6 +8,8 @@ import networkx as nx
 import numpy as np
 from src.models.network import WirelessNetwork
 from src.models.node import Node
+from src.algorithm.kruskal import KruskalMST
+from src.algorithm.prim import PrimMST
 
 class MountainMST:
     """MST implementation optimized for mountainous terrain."""
@@ -144,39 +69,6 @@ class MountainMST:
         
         return distance_cost * elevation_factor * weather_factor * terrain_factor
 
-    def find_mst(self) -> List[Tuple[int, int]]:
-        """
-        Find minimum spanning tree using Kruskal's algorithm.
-        Adapted for mountainous terrain considerations.
-        """
-        edges = []
-        
-        # Calculate costs for all possible edges
-        for node1_id in self.network.nodes:
-            for node2_id in self.network.nodes:
-                if node1_id < node2_id:  # Avoid duplicates
-                    node1 = self.network.nodes[node1_id]
-                    node2 = self.network.nodes[node2_id]
-                    
-                    cost = self._calculate_edge_cost(node1, node2)
-                    edges.append((node1_id, node2_id, cost))
-        
-        # Sort edges by cost
-        edges.sort(key=lambda x: x[2])
-        
-        # Initialize disjoint sets
-        for v in self.network.nodes:
-            self._make_set(v)
-        
-        # Build MST
-        mst_edges = []
-        for v1, v2, cost in edges:
-            if self._find(v1) != self._find(v2):
-                self._union(v1, v2)
-                mst_edges.append((v1, v2))
-                
-        return mst_edges
-
 def calculate_mst_metrics(network: WirelessNetwork, 
                          mst_edges: List[Tuple[int, int]]) -> Dict:
     """Calculate metrics for MST solution."""
@@ -211,7 +103,7 @@ def calculate_mst_metrics(network: WirelessNetwork,
     }
 
 def solve_mountain_scenario(network: WirelessNetwork,
-                          algorithm: str = 'kruskal',
+                          algorithm: str = 'prim',
                           constraints: Dict = None) -> Optional[List[Tuple[int, int]]]:
     """
     Find optimal MST considering mountainous terrain.
@@ -242,8 +134,15 @@ def solve_mountain_scenario(network: WirelessNetwork,
         network.graph.edges[edge]['weight'] = adjusted_weight
     
     # Find MST
-    mst = MountainMST(network)
-    mst_edges = mst.find_mst()
+    mountain_mst = MountainMST(network)
+    if algorithm == 'kruskal':
+        mst_solver = KruskalMST(mountain_mst)
+    elif algorithm == 'prim':
+        mst_solver = PrimMST(mountain_mst)
+    else:
+        raise NotImplementedError("Only Kruskal's and Prim's algorithms are implemented")
+
+    mst_edges = mst_solver.find_mst()
     
     # Validate solution
     if mst_edges and validate_mountain_solution(network, mst_edges, constraints):

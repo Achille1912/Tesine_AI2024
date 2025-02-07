@@ -1,72 +1,35 @@
-"""
-A* pathfinding algorithm implementation for energy grid optimization.
-"""
+from src.models.network import WirelessNetwork
+from typing import List, Tuple, Dict, Optional
+import heapq
 
-from typing import List, Optional, Dict, Set, Callable
-from queue import PriorityQueue
-from src.models.graph import EnergyGrid
-from src.algorithm.heuristics import BaseHeuristic
+class PrimMST:
+    """Prim's MST implementation."""
 
-class AStarPathfinder:
-    """A* pathfinding implementation for energy grid."""
-    
-    def __init__(self, grid: EnergyGrid, heuristic: BaseHeuristic):
-        """
-        Initialize pathfinder with grid and heuristic.
-        
-        Args:
-            grid: The energy distribution grid
-            heuristic: Heuristic function implementation
-        """
-        self.grid = grid
-        self.heuristic = heuristic
-    
-    def find_path(self, start: int, goal: int) -> Optional[List[int]]:
-        """
-        Find optimal path between start and goal stations.
-        
-        Args:
-            start: Starting station ID
-            goal: Goal station ID
-            
-        Returns:
-            Optional[List[int]]: Path from start to goal if found, None otherwise
-        """
-        # TODO: Student Implementation
-        # 1. Initialize data structures
-        #    - Priority queue for open set
-        #    - Set for closed set
-        #    - Dictionary for g_scores
-        #    - Dictionary for came_from (to reconstruct path)
-        
-        # 2. Initialize algorithm
-        #    - Add start node to open set
-        #    - Set initial g_score
-        #    - Set initial f_score using heuristic
-        
-        # 3. Main loop
-        #    - Get node with lowest f_score from open set
-        #    - If goal reached, reconstruct path
-        #    - For each neighbor:
-        #      * Calculate tentative g_score
-        #      * If better path found, update data structures
-        
-        # 4. Reconstruct path when goal is reached
-        
-        # 5. Return None if no path found
-        pass
-    
-    def _reconstruct_path(self, came_from: Dict[int, int], 
-                         current: int) -> List[int]:
-        """
-        Reconstruct path from came_from dictionary.
-        
-        Args:
-            came_from: Dictionary tracking path predecessors
-            current: Current (goal) node
-            
-        Returns:
-            List[int]: Reconstructed path
-        """
-        # TODO: Student Implementation
-        pass
+    def __init__(self, mst):
+        """Initialize with network and MountainMST instance."""
+        self.network = mst.network
+        self.mst = mst
+
+    def find_mst(self) -> List[Tuple[int, int]]:
+        """Calculate the Minimum Spanning Tree (MST) using Prim's algorithm."""
+        start_node = next(iter(self.network.nodes))
+        visited = set()
+        mst_edges = []
+        edge_heap = []
+
+        def add_edges(node_id):
+            visited.add(node_id)
+            for neighbor_id in self.network.nodes[node_id].adjacent_nodes:
+                if neighbor_id not in visited:
+                    cost = self.mst._calculate_edge_cost(self.network.nodes[node_id], self.network.nodes[neighbor_id])
+                    heapq.heappush(edge_heap, (cost, node_id, neighbor_id))
+
+        add_edges(start_node)
+
+        while edge_heap and len(mst_edges) < len(self.network.nodes) - 1:
+            cost, node1_id, node2_id = heapq.heappop(edge_heap)
+            if node2_id not in visited:
+                mst_edges.append((node1_id, node2_id))
+                add_edges(node2_id)
+
+        return mst_edges
