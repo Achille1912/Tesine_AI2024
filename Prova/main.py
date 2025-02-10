@@ -60,7 +60,7 @@ fig, ax = plt.subplots()
 line_best, = ax.plot([], [], 'bo-', label="Global Best Fitness")
 line_avg, = ax.plot([], [], 'ro-', label="Average Fitness")
 ax.set_xlabel("Iterazione")
-ax.set_ylabel("Fitness")
+ax.set_ylabel("Fitness (inverted)")
 ax.set_title("Convergenza PSO")
 ax.grid(True)
 ax.legend()
@@ -93,8 +93,8 @@ for iteration in range(max_iter):
     
     # Calcola l'average fitness a partire dalle fitness personali
     avg_fitness = np.mean(pbest_scores)
-    gbest_history.append(gbest_score)
-    avg_history.append(avg_fitness)
+    gbest_history.append(1 / gbest_score)  # Inverti il valore di fitness
+    avg_history.append(1 / avg_fitness)  # Inverti il valore di fitness
     
     # Aggiornamento della trama
     line_best.set_data(range(len(gbest_history)), gbest_history)
@@ -110,3 +110,22 @@ plt.show()
 # Features selezionate
 selected_features = [num_features[int(i)] for i in gbest_position]
 print("Ottimizzazione completata! Features selezionate:", selected_features)
+
+def decode_binary_chromosome(binary_string, num_features):
+    """
+    Decodifica una stringa binaria in un elenco di feature selezionate.
+    
+    Args:
+    binary_string (str): La stringa binaria che rappresenta le feature selezionate.
+    num_features (list): L'elenco delle feature disponibili.
+    
+    Returns:
+    list: L'elenco delle feature selezionate.
+    """
+    selected_features = [num_features[i] for i in range(len(binary_string)) if binary_string[i] == '1']
+    return selected_features
+
+def fitness_wrapper(chromosome: np.ndarray) -> float:
+    """Wrapper for fitness function to handle binary chromosome."""
+    params = decode_binary_chromosome(chromosome)
+    return fitness_function(params)
