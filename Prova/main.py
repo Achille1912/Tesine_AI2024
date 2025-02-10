@@ -16,9 +16,7 @@ df = pd.read_csv(file_path)
 # Selezioniamo solo le colonne numeriche
 num_features = df.select_dtypes(include=[np.number]).columns.tolist()
 
-# Assicuriamoci di avere almeno 50 features
-if len(num_features) < 50:
-    raise ValueError("Il dataset ha meno di 50 features numeriche, impossibile procedere.")
+
 
 # Funzione di fitness: minimizza la correlazione media tra le features selezionate
 def fitness_function(selected_features):
@@ -28,6 +26,44 @@ def fitness_function(selected_features):
     upper_triangle = corr_matrix.where(np.triu(np.ones(corr_matrix.shape), k=1).astype(bool))
     mean_corr = upper_triangle.stack().mean()
     return mean_corr  # Minimizziamo questa quantità
+
+def decode_binary_chromosome(binary_string, num_features):
+    """
+    Decodifica una stringa binaria in un elenco di feature selezionate.
+    
+    Args:
+    binary_string (str): La stringa binaria che rappresenta le feature selezionate.
+    num_features (list): L'elenco delle feature disponibili.
+    
+    Returns:
+    list: L'elenco delle feature selezionate.
+    """
+    selected_features = [num_features[i] for i in range(len(binary_string)) if binary_string[i] == '1']
+    return selected_features
+
+def encode_binary_chromosome(selected_features, num_features):
+    """
+    Codifica un elenco di feature selezionate in una lista binaria.
+    
+    Args:
+    selected_features (list): L'elenco delle feature selezionate.
+    num_features (list): L'elenco delle feature disponibili.
+    
+    Returns:
+    list: La lista binaria che rappresenta le feature selezionate.
+    """
+    binary_list = [0] * len(num_features)
+    for feature in selected_features:
+        index = num_features.index(feature)
+        binary_list[index] = 1
+    return binary_list
+
+
+def fitness_wrapper(chromosome: np.ndarray) -> float:
+    """Wrapper for fitness function to handle binary chromosome."""
+    params = decode_binary_chromosome(chromosome, num_features)
+    return fitness_function(params)
+
 
 # Dimensione dello spazio delle particelle
 dim = 50  # 50 features da selezionare
@@ -111,21 +147,3 @@ plt.show()
 selected_features = [num_features[int(i)] for i in gbest_position]
 print("Ottimizzazione completata! Features selezionate:", selected_features)
 
-def decode_binary_chromosome(binary_string, num_features):
-    """
-    Decodifica una stringa binaria in un elenco di feature selezionate.
-    
-    Args:
-    binary_string (str): La stringa binaria che rappresenta le feature selezionate.
-    num_features (list): L'elenco delle feature disponibili.
-    
-    Returns:
-    list: L'elenco delle feature selezionate.
-    """
-    selected_features = [num_features[i] for i in range(len(binary_string)) if binary_string[i] == '1']
-    return selected_features
-
-def fitness_wrapper(chromosome: np.ndarray) -> float:
-    """Wrapper for fitness function to handle binary chromosome."""
-    params = decode_binary_chromosome(chromosome)
-    return fitness_function(params)
