@@ -19,7 +19,7 @@ class PrimMST:
 
         def add_edges(node_id):
             visited.add(node_id)
-            for neighbor_id in self.network.nodes[node_id].adjacent_nodes:
+            for neighbor_id in self.network.graph.neighbors(node_id):
                 if neighbor_id not in visited:
                     cost = self.mst._calculate_edge_cost(self.network.nodes[node_id], self.network.nodes[neighbor_id])
                     heapq.heappush(edge_heap, (cost, node_id, neighbor_id))

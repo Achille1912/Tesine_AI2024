@@ -68,7 +68,38 @@ class EnergyMST:
         print(f"Edge ({node1.id}, {node2.id}): distance_cost={distance_cost}, power_requirement={power_requirement}, cost={cost}")
         return cost
 
-
+def calculate_mst_metrics(network: WirelessNetwork, 
+                         mst_edges: List[Tuple[int, int]]) -> Dict:
+    """Calculate metrics for MST solution."""
+    total_distance = 0.0
+    max_elevation_diff = 0.0
+    total_elevation_change = 0.0
+    max_edge_cost = 0.0
+    
+    for edge in mst_edges:
+        node1 = network.nodes[edge[0]]
+        node2 = network.nodes[edge[1]]
+        
+        # Distance
+        distance = node1.distance_to(node2)
+        total_distance += distance
+        
+        # Elevation
+        elev_diff = abs(node1.elevation - node2.elevation)
+        max_elevation_diff = max(max_elevation_diff, elev_diff)
+        total_elevation_change += elev_diff
+        
+        # Cost
+        edge_data = network.graph.get_edge_data(edge[0], edge[1])
+        if edge_data:
+            max_edge_cost = max(max_edge_cost, edge_data['weight'])
+            
+    return {
+        'total_distance': total_distance,
+        'max_elevation_diff': max_elevation_diff,
+        'avg_elevation_change': total_elevation_change / len(mst_edges),
+        'max_edge_cost': max_edge_cost
+    }
 
 def solve_energy_scenario(network: WirelessNetwork,
                          algorithm: str = 'kruskal',
@@ -132,6 +163,14 @@ def solve_energy_scenario(network: WirelessNetwork,
 
     # Validate solution
     if mst_edges and validate_energy_solution(network, mst_edges, constraints):
+        # Calculate and log metrics
+        metrics = calculate_mst_metrics(network, mst_edges)
+        print(f"\Energy MST Metrics:")
+        print(f"Total Distance: {metrics['total_distance']:.2f}")
+        print(f"Max Elevation Difference: {metrics['max_elevation_diff']:.2f}m")
+        print(f"Average Elevation Change: {metrics['avg_elevation_change']:.2f}m")
+        print(f"Maximum Edge Cost: {metrics['max_edge_cost']:.2f}")
+
         return mst_edges
 
     return None

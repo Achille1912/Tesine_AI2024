@@ -124,17 +124,18 @@ def solve_mountain_scenario(network: WirelessNetwork,
         node2 = network.nodes[edge[1]]
         
         # Update edge weight with terrain-aware cost
-        elevation_diff = abs(node1.elevation - node2.elevation)
-        terrain_factor = (node1.terrain_difficulty + node2.terrain_difficulty) / 2
-        weather_factor = 1.0 + (max(node1.elevation, node2.elevation) / 1000.0)
+        # elevation_diff = abs(node1.elevation - node2.elevation)
+        # terrain_factor = (node1.terrain_difficulty + node2.terrain_difficulty) / 2
+        # weather_factor = 1.0 + (max(node1.elevation, node2.elevation) / 1000.0)
         
-        base_weight = network.graph.edges[edge]['weight']
-        adjusted_weight = base_weight * (1 + elevation_diff/100) * terrain_factor * weather_factor
-        
+        #base_weight = network.graph.edges[edge]['weight']
+        # adjusted_weight = base_weight * (1 + elevation_diff/100) * terrain_factor * weather_factor
+        adjusted_weight = MountainMST(network)._calculate_edge_cost(node1, node2)
         network.graph.edges[edge]['weight'] = adjusted_weight
     
     # Find MST
     mountain_mst = MountainMST(network)
+    
     if algorithm == 'kruskal':
         mst_solver = KruskalMST(mountain_mst)
     elif algorithm == 'prim':
