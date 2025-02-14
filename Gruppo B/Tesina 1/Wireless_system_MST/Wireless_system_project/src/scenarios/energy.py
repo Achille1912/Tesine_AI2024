@@ -50,22 +50,13 @@ class EnergyMST:
                 # - Ensure sufficient power capacity
                 # - Optimize transmission distances
         """
-        # Base distance cost
-        distance_cost = node1.distance_to(node2)
-
+        base_cost = node1.get_link_cost(node2)
+        
         # Power requirement factor
         power_requirement = node1.get_power_requirement(node2)
         power_factor = 1.0 + (power_requirement / node1.power_capacity)
 
-        # Terrain difficulty factor (higher difficulty = higher cost)
-        terrain_difficulty = max(node1.terrain_difficulty, node2.terrain_difficulty)
-        stability_factor = 1.0 + (terrain_difficulty - 1.0) * 0.5  # Softer penalty
-
-        # Redundancy factor (if a node is critical, ensure redundancy)
-        redundancy_factor = 1.2 if power_requirement > node1.power_capacity * 0.7 else 1.0
-
-        cost = distance_cost * power_factor * stability_factor * redundancy_factor
-        print(f"Edge ({node1.id}, {node2.id}): distance_cost={distance_cost}, power_requirement={power_requirement}, cost={cost}")
+        cost = base_cost * power_factor 
         return cost
 
 def calculate_mst_metrics(network: WirelessNetwork, 
@@ -145,7 +136,6 @@ def solve_energy_scenario(network: WirelessNetwork,
         node1 = network.nodes[edge[0]]
         node2 = network.nodes[edge[1]]
 
-        base_weight = network.graph.edges[edge]['weight']
         energy_cost = EnergyMST(network)._calculate_edge_cost(node1, node2)
 
         network.graph.edges[edge]['weight'] = energy_cost

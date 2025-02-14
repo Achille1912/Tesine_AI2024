@@ -53,21 +53,13 @@ class MountainMST:
         3. Terrain difficulty
         4. Weather impact (higher elevations = higher cost)
         """
-        # Base distance cost
-        distance_cost = node1.distance_to(node2)
-        
-        # Elevation difference factor (exponential penalty for large differences)
-        elevation_diff = abs(node1.elevation - node2.elevation)
-        elevation_factor = 1.0 + (elevation_diff / 100.0) ** 1.5
+        base_cost = node1.get_link_cost(node2)
         
         # Weather impact factor (higher elevation = worse weather)
         avg_elevation = (node1.elevation + node2.elevation) / 2
         weather_factor = 1.0 + (avg_elevation / 1000.0) ** 2
-        
-        # Terrain difficulty
-        terrain_factor = (node1.terrain_difficulty + node2.terrain_difficulty) / 2
-        
-        return distance_cost * elevation_factor * weather_factor * terrain_factor
+                
+        return base_cost * weather_factor
 
 def calculate_mst_metrics(network: WirelessNetwork, 
                          mst_edges: List[Tuple[int, int]]) -> Dict:
@@ -94,12 +86,20 @@ def calculate_mst_metrics(network: WirelessNetwork,
         edge_data = network.graph.get_edge_data(edge[0], edge[1])
         if edge_data:
             max_edge_cost = max(max_edge_cost, edge_data['weight'])
-            
+    
+    # Calculate betweenness centrality
+    subgraph = network.graph.edge_subgraph(mst_edges).copy()
+    betweenness_centrality = nx.betweenness_centrality(subgraph)
+    
+    # Extract the node with maximum betweenness centrality
+    max_betweenness_node = max(betweenness_centrality, key=betweenness_centrality.get)
+    
     return {
         'total_distance': total_distance,
         'max_elevation_diff': max_elevation_diff,
         'avg_elevation_change': total_elevation_change / len(mst_edges),
-        'max_edge_cost': max_edge_cost
+        'max_edge_cost': max_edge_cost,
+        'betweenness_centrality': max_betweenness_node
     }
 
 def solve_mountain_scenario(network: WirelessNetwork,
@@ -154,6 +154,8 @@ def solve_mountain_scenario(network: WirelessNetwork,
         print(f"Max Elevation Difference: {metrics['max_elevation_diff']:.2f}m")
         print(f"Average Elevation Change: {metrics['avg_elevation_change']:.2f}m")
         print(f"Maximum Edge Cost: {metrics['max_edge_cost']:.2f}")
+        print(f"Betweeness Centrality: {metrics['betweenness_centrality']}")
+
         
         return mst_edges
         

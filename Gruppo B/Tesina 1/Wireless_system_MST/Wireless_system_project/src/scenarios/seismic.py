@@ -49,23 +49,17 @@ class SeismicMST:
             3. Terrain stability
             4. Network redundancy requirements
         """
-        # Base distance cost
-        distance_cost = node1.distance_to(node2)
+
+        base_cost = node1.get_link_cost(node2)
 
         # Seismic vulnerability factor (higher = riskier)
         vulnerability_score = node1.get_vulnerability_score(node2)
         vulnerability_factor = 1.0 + (vulnerability_score * 2)  # Penalizza connessioni tra nodi vulnerabili
 
-        # Terrain difficulty factor (higher difficulty = higher cost)
-        terrain_difficulty = max(node1.terrain_difficulty, node2.terrain_difficulty)
-        #stability_factor = 1.0 + terrain_difficulty  # Più alto è il valore, maggiore è la penalizzazione
-        # Riduciamo l'impatto del terrain_difficulty, usando una scala più dolce
-        stability_factor = 1.0 + (terrain_difficulty - 1.0) * 0.5  # Penalizzazione più soft
-
         # Redundancy factor (if a node is critical, ensure redundancy)
         redundancy_factor = 1.2 if vulnerability_score > 0.7 else 1.0
 
-        return distance_cost * vulnerability_factor * stability_factor * redundancy_factor
+        return base_cost * vulnerability_factor * redundancy_factor
 
 def calculate_mst_metrics(network: WirelessNetwork, 
                          mst_edges: List[Tuple[int, int]]) -> Dict:
@@ -144,9 +138,7 @@ def solve_seismic_scenario(network: WirelessNetwork, algorithm: str = 'kruskal',
         node1 = network.nodes[edge[0]]
         node2 = network.nodes[edge[1]]
 
-        base_weight = network.graph.edges[edge]['weight']
         seismic_cost = SeismicMST(network)._calculate_edge_cost(node1, node2)
-
         network.graph.edges[edge]['weight'] = seismic_cost
 
     # Find MST
