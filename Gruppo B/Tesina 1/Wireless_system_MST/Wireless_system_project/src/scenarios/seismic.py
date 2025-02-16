@@ -6,6 +6,7 @@ Goal: Ensure network resilience in seismic areas.
 from typing import List, Tuple, Optional, Dict
 from src.models.network import WirelessNetwork
 from src.models.node import Node
+import networkx as nx
 from src.algorithm.kruskal import KruskalMST
 from src.algorithm.prim import PrimMST
 
@@ -57,7 +58,7 @@ class SeismicMST:
         vulnerability_factor = 1.0 + (vulnerability_score * 2)  # Penalizza connessioni tra nodi vulnerabili
 
         # Redundancy factor (if a node is critical, ensure redundancy)
-        redundancy_factor = 1.2 if vulnerability_score > 0.7 else 1.0
+        redundancy_factor = 2 if vulnerability_score > 0.7 else 1.5
 
         return base_cost * vulnerability_factor * redundancy_factor
 
@@ -68,6 +69,7 @@ def calculate_mst_metrics(network: WirelessNetwork,
     max_elevation_diff = 0.0
     total_elevation_change = 0.0
     max_edge_cost = 0.0
+    max_vulnerability_score = 0.0
     
     for edge in mst_edges:
         node1 = network.nodes[edge[0]]
@@ -86,12 +88,25 @@ def calculate_mst_metrics(network: WirelessNetwork,
         edge_data = network.graph.get_edge_data(edge[0], edge[1])
         if edge_data:
             max_edge_cost = max(max_edge_cost, edge_data['weight'])
+        
+        # Vulnerability Score
+        vulnerability_score = node1.get_vulnerability_score(node2)
+        max_vulnerability_score = max(vulnerability_score, max_vulnerability_score)
+
+        # Calculate betweenness centrality
+        subgraph = network.graph.edge_subgraph(mst_edges).copy()
+        betweenness_centrality = nx.betweenness_centrality(subgraph)
+        
+        # Extract the node with maximum betweenness centrality
+        max_betweenness_node = max(betweenness_centrality, key=betweenness_centrality.get)
             
     return {
         'total_distance': total_distance,
         'max_elevation_diff': max_elevation_diff,
         'avg_elevation_change': total_elevation_change / len(mst_edges),
-        'max_edge_cost': max_edge_cost
+        'max_edge_cost': max_edge_cost,
+        'vulnerability_score': max_vulnerability_score,
+        'betweenness_centrality': max_betweenness_node
     }
 
 def solve_seismic_scenario(network: WirelessNetwork, algorithm: str = 'kruskal', constraints: Dict = None) -> Optional[List[Tuple[int, int]]]:
@@ -161,6 +176,8 @@ def solve_seismic_scenario(network: WirelessNetwork, algorithm: str = 'kruskal',
         print(f"Max Elevation Difference: {metrics['max_elevation_diff']:.2f}m")
         print(f"Average Elevation Change: {metrics['avg_elevation_change']:.2f}m")
         print(f"Maximum Edge Cost: {metrics['max_edge_cost']:.2f}")
+        print(f"Betweeness Centrality: {metrics['betweenness_centrality']}")
+        print(f"Vulnerability Score: {metrics['vulnerability_score']:.2f}")
 
         return mst_edges
 
@@ -190,7 +207,13 @@ def validate_seismic_solution(network: WirelessNetwork,
             return False
     
     # Check redundancy requirements
-    # TODO: Implement redundancy validation
+    for edge in mst_edges:
+        node1 = network.nodes[edge[0]]
+        node2 = network.nodes[edge[1]]
+        vulnerability_score = node1.get_vulnerability_score(node2)
+        red_factor = 2 if vulnerability_score > 0.7 else 1.5
+        if red_factor < min_redundancy or red_factor > redundancy_factor:
+            return False
     
 
     

@@ -5,6 +5,7 @@ Goal: Minimize power consumption while maintaining connectivity.
 
 from typing import List, Tuple, Optional, Dict
 from src.models.network import WirelessNetwork
+import networkx as nx
 from src.models.node import Node
 from src.algorithm.kruskal import KruskalMST
 from src.algorithm.prim import PrimMST
@@ -66,6 +67,7 @@ def calculate_mst_metrics(network: WirelessNetwork,
     max_elevation_diff = 0.0
     total_elevation_change = 0.0
     max_edge_cost = 0.0
+    power_capacity = 0.0
     
     for edge in mst_edges:
         node1 = network.nodes[edge[0]]
@@ -84,12 +86,24 @@ def calculate_mst_metrics(network: WirelessNetwork,
         edge_data = network.graph.get_edge_data(edge[0], edge[1])
         if edge_data:
             max_edge_cost = max(max_edge_cost, edge_data['weight'])
+
+        # Power Capacity
+        power_capacity += node1.power_capacity
+
+        # Calculate betweenness centrality
+        subgraph = network.graph.edge_subgraph(mst_edges).copy()
+        betweenness_centrality = nx.betweenness_centrality(subgraph)
+        
+        # Extract the node with maximum betweenness centrality
+        max_betweenness_node = max(betweenness_centrality, key=betweenness_centrality.get)
             
     return {
         'total_distance': total_distance,
         'max_elevation_diff': max_elevation_diff,
         'avg_elevation_change': total_elevation_change / len(mst_edges),
-        'max_edge_cost': max_edge_cost
+        'max_edge_cost': max_edge_cost,
+        'power_capacity': power_capacity,
+        'betweenness_centrality': max_betweenness_node
     }
 
 def solve_energy_scenario(network: WirelessNetwork,
@@ -160,6 +174,8 @@ def solve_energy_scenario(network: WirelessNetwork,
         print(f"Max Elevation Difference: {metrics['max_elevation_diff']:.2f}m")
         print(f"Average Elevation Change: {metrics['avg_elevation_change']:.2f}m")
         print(f"Maximum Edge Cost: {metrics['max_edge_cost']:.2f}")
+        print(f"Betweeness Centrality: {metrics['betweenness_centrality']}")
+        print(f"Power Capacity: {metrics['power_capacity']:.2f}")
 
         return mst_edges
 
