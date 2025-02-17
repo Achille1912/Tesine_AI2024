@@ -11,54 +11,25 @@ from src.algorithm.kruskal import KruskalMST
 from src.algorithm.prim import PrimMST
 
 
-class EnergyMST:
-    """MST implementation optimized for energy zones."""
 
-    def __init__(self, network: WirelessNetwork):
-        """Initialize with network."""
-        self.network = network
-        self.parent: Dict[int, int] = {}
-        self.rank: Dict[int, int] = {}
-
-    def _make_set(self, v: int) -> None:
-        """Initialize disjoint set for vertex."""
-        self.parent[v] = v
-        self.rank[v] = 0
-
-    def _find(self, v: int) -> int:
-        """Find set representative with path compression."""
-        if self.parent[v] != v:
-            self.parent[v] = self._find(self.parent[v])
-        return self.parent[v]
-
-    def _union(self, v1: int, v2: int) -> None:
-        """Union sets by rank."""
-        root1 = self._find(v1)
-        root2 = self._find(v2)
-
-        if root1 != root2:
-            if self.rank[root1] < self.rank[root2]:
-                root1, root2 = root2, root1
-            self.parent[root2] = root1
-            if self.rank[root1] == self.rank[root2]:
-                self.rank[root1] += 1
-
-    def _calculate_edge_cost(self, node1: Node, node2: Node) -> float:
-        """
-        Calculate the cost of an edge between two nodes considering various factors:
-                # - Minimize total power consumption
-                # - Balance load across nodes
-                # - Ensure sufficient power capacity
-                # - Optimize transmission distances
-        """
-        base_cost = node1.get_link_cost(node2)
+def calculate_edge_cost(node1: Node, node2: Node) -> float:
+    """
+    Calculate the cost of an edge between two nodes considering various factors:
+    # - Minimize total power consumption
+    # - Balance load across nodes
+    # - Ensure sufficient power capacity
+    # - Optimize transmission distances
+    """
+    base_cost = node1.get_link_cost(node2)
         
-        # Power requirement factor
-        power_requirement = node1.get_power_requirement(node2)
-        power_factor = 1.0 + (power_requirement / node1.power_capacity)
+    # Power requirement factor
+    power_requirement = node1.get_power_requirement(node2)
+    power_factor = 1.0 + (power_requirement / node1.power_capacity)
 
-        cost = base_cost * power_factor 
-        return cost
+    cost = base_cost * power_factor 
+    return cost
+    
+
 
 def calculate_mst_metrics(network: WirelessNetwork, 
                          mst_edges: List[Tuple[int, int]]) -> Dict:
@@ -150,16 +121,15 @@ def solve_energy_scenario(network: WirelessNetwork,
         node1 = network.nodes[edge[0]]
         node2 = network.nodes[edge[1]]
 
-        energy_cost = EnergyMST(network)._calculate_edge_cost(node1, node2)
+        energy_cost = calculate_edge_cost(node1, node2)
 
         network.graph.edges[edge]['weight'] = energy_cost
 
     # Find MST
-    sismic_mst = EnergyMST(network)
     if algorithm == 'kruskal':
-        mst_solver = KruskalMST(sismic_mst)
+        mst_solver = KruskalMST(network)
     elif algorithm == 'prim':
-        mst_solver = PrimMST(sismic_mst)
+        mst_solver = PrimMST(network, calculate_edge_cost)
     else:
         raise NotImplementedError("Only Kruskal's and Prim's algorithms are implemented")
 

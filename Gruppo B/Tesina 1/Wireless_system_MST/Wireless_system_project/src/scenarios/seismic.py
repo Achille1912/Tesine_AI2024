@@ -10,57 +10,26 @@ import networkx as nx
 from src.algorithm.kruskal import KruskalMST
 from src.algorithm.prim import PrimMST
 
-class SeismicMST:
-    """MST implementation optimized for seismic zones."""
 
-    def __init__(self, network: WirelessNetwork):
-        """Initialize with network."""
-        self.network = network
-        self.parent: Dict[int, int] = {}
-        self.rank: Dict[int, int] = {}
+def calculate_edge_cost(node1: Node, node2: Node) -> float:
+    """
+    Calculate the cost of an edge between two nodes considering various factors:
+    1. Base distance
+    2. Seismic vulnerability
+    3. Terrain stability
+    4. Network redundancy requirements
+    """
 
-    def _make_set(self, v: int) -> None:
-        """Initialize disjoint set for vertex."""
-        self.parent[v] = v
-        self.rank[v] = 0
+    base_cost = node1.get_link_cost(node2)
+    # Seismic vulnerability factor (higher = riskier)
+    vulnerability_score = node1.get_vulnerability_score(node2)
+    vulnerability_factor = 1.0 + (vulnerability_score * 2)  # Penalizza connessioni tra nodi vulnerabili
 
-    def _find(self, v: int) -> int:
-        """Find set representative with path compression."""
-        if self.parent[v] != v:
-            self.parent[v] = self._find(self.parent[v])
-        return self.parent[v]
+    # Redundancy factor (if a node is critical, ensure redundancy)
+    redundancy_factor = 2 if vulnerability_score > 0.7 else 1.5
 
-    def _union(self, v1: int, v2: int) -> None:
-        """Union sets by rank."""
-        root1 = self._find(v1)
-        root2 = self._find(v2)
-
-        if root1 != root2:
-            if self.rank[root1] < self.rank[root2]:
-                root1, root2 = root2, root1
-            self.parent[root2] = root1
-            if self.rank[root1] == self.rank[root2]:
-                self.rank[root1] += 1
-
-    def _calculate_edge_cost(self, node1: Node, node2: Node) -> float:
-        """
-        Calculate the cost of an edge between two nodes considering various factors:
-            1. Base distance
-            2. Seismic vulnerability
-            3. Terrain stability
-            4. Network redundancy requirements
-        """
-
-        base_cost = node1.get_link_cost(node2)
-
-        # Seismic vulnerability factor (higher = riskier)
-        vulnerability_score = node1.get_vulnerability_score(node2)
-        vulnerability_factor = 1.0 + (vulnerability_score * 2)  # Penalizza connessioni tra nodi vulnerabili
-
-        # Redundancy factor (if a node is critical, ensure redundancy)
-        redundancy_factor = 2 if vulnerability_score > 0.7 else 1.5
-
-        return base_cost * vulnerability_factor * redundancy_factor
+    return base_cost * vulnerability_factor * redundancy_factor
+    
 
 def calculate_mst_metrics(network: WirelessNetwork, 
                          mst_edges: List[Tuple[int, int]]) -> Dict:
@@ -153,15 +122,14 @@ def solve_seismic_scenario(network: WirelessNetwork, algorithm: str = 'kruskal',
         node1 = network.nodes[edge[0]]
         node2 = network.nodes[edge[1]]
 
-        seismic_cost = SeismicMST(network)._calculate_edge_cost(node1, node2)
+        seismic_cost = calculate_edge_cost(node1, node2)
         network.graph.edges[edge]['weight'] = seismic_cost
 
     # Find MST
-    sismic_mst = SeismicMST(network)
     if algorithm == 'kruskal':
-        mst_solver = KruskalMST(sismic_mst)
+        mst_solver = KruskalMST(network)
     elif algorithm == 'prim':
-        mst_solver = PrimMST(sismic_mst)
+        mst_solver = PrimMST(network, calculate_edge_cost)
     else:
         raise NotImplementedError("Only Kruskal's and Prim's algorithms are implemented")
 

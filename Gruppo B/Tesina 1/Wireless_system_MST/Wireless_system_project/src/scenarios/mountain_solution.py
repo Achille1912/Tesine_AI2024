@@ -11,55 +11,24 @@ from src.models.node import Node
 from src.algorithm.kruskal import KruskalMST
 from src.algorithm.prim import PrimMST
 
-class MountainMST:
-    """MST implementation optimized for mountainous terrain."""
-    
-    def __init__(self, network: WirelessNetwork):
-        """Initialize with network."""
-        self.network = network
-        self.parent: Dict[int, int] = {}
-        self.rank: Dict[int, int] = {}
-        
-    def _make_set(self, v: int) -> None:
-        """Initialize disjoint set for vertex."""
-        self.parent[v] = v
-        self.rank[v] = 0
-        
-    def _find(self, v: int) -> int:
-        """Find set representative with path compression."""
-        if self.parent[v] != v:
-            self.parent[v] = self._find(self.parent[v])
-        return self.parent[v]
-        
-    def _union(self, v1: int, v2: int) -> None:
-        """Union sets by rank."""
-        root1 = self._find(v1)
-        root2 = self._find(v2)
-        
-        if root1 != root2:
-            if self.rank[root1] < self.rank[root2]:
-                root1, root2 = root2, root1
-            self.parent[root2] = root1
-            if self.rank[root1] == self.rank[root2]:
-                self.rank[root1] += 1
+def calculate_edge_cost(node1: Node, node2: Node) -> float:
+    """
+    Calculate edge cost considering mountainous terrain.
+            
+    Factors:
+    1. Base distance
+    2. Elevation difference
+    3. Terrain difficulty
+    4. Weather impact (higher elevations = higher cost)
+    """
+    base_cost = node1.get_link_cost(node2)
+            
+    # Weather impact factor (higher elevation = worse weather)
+    avg_elevation = (node1.elevation + node2.elevation) / 2
+    weather_factor = 1.0 + (avg_elevation / 1000.0) ** 2
+                    
+    return base_cost * weather_factor
 
-    def _calculate_edge_cost(self, node1: Node, node2: Node) -> float:
-        """
-        Calculate edge cost considering mountainous terrain.
-        
-        Factors:
-        1. Base distance
-        2. Elevation difference
-        3. Terrain difficulty
-        4. Weather impact (higher elevations = higher cost)
-        """
-        base_cost = node1.get_link_cost(node2)
-        
-        # Weather impact factor (higher elevation = worse weather)
-        avg_elevation = (node1.elevation + node2.elevation) / 2
-        weather_factor = 1.0 + (avg_elevation / 1000.0) ** 2
-                
-        return base_cost * weather_factor
 
 def calculate_mst_metrics(network: WirelessNetwork, 
                          mst_edges: List[Tuple[int, int]]) -> Dict:
@@ -118,6 +87,7 @@ def solve_mountain_scenario(network: WirelessNetwork,
     Returns:
         Optional[List[Tuple[int, int]]]: MST edges if found
     """
+
     # Apply terrain-based cost adjustments
     for edge in network.graph.edges():
         node1 = network.nodes[edge[0]]
@@ -130,16 +100,16 @@ def solve_mountain_scenario(network: WirelessNetwork,
         
         #base_weight = network.graph.edges[edge]['weight']
         # adjusted_weight = base_weight * (1 + elevation_diff/100) * terrain_factor * weather_factor
-        adjusted_weight = MountainMST(network)._calculate_edge_cost(node1, node2)
+        adjusted_weight = calculate_edge_cost(node1, node2)
         network.graph.edges[edge]['weight'] = adjusted_weight
     
     # Find MST
-    mountain_mst = MountainMST(network)
+    #mountain_mst = MountainMST(network)
     
     if algorithm == 'kruskal':
-        mst_solver = KruskalMST(mountain_mst)
+        mst_solver = KruskalMST(network)
     elif algorithm == 'prim':
-        mst_solver = PrimMST(mountain_mst)
+        mst_solver = PrimMST(network, calculate_edge_cost)
     else:
         raise NotImplementedError("Only Kruskal's and Prim's algorithms are implemented")
 
