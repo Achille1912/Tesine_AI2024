@@ -7,8 +7,7 @@ sys.dont_write_bytecode = True
 
 from src.models.network import WirelessNetwork
 from src.utils.visualization import NetworkVisualizer
-# from src.scenarios.mountain import solve_mountain_scenario
-from src.scenarios.mountain_solution import solve_mountain_scenario
+from src.scenarios.mountain import solve_mountain_scenario
 from src.scenarios.seismic import solve_seismic_scenario
 from src.scenarios.energy import solve_energy_scenario
 
