@@ -97,20 +97,37 @@ class PSOFeatureSelection:
         plt.ioff()
         plt.show()
 
+        # Create a single figure with multiple subplots
+        fig, axs = plt.subplots(2, 2, figsize=(12, 10))
+
+        # Plot the history of best and average fitness scores
+        axs[0, 0].plot(self.history_best, label="Best Solution", color='b')
+        axs[0, 0].plot(self.history_avg, label="Avg Solution", color='r')
+        axs[0, 0].set_xlabel("Iterations")
+        axs[0, 0].set_ylabel("Fitness Score")
+        axs[0, 0].set_title("Fitness Score Over Iterations")
+        axs[0, 0].legend()
+
         # Boxplot for fitness score distribution
-        plt.figure()
-        plt.boxplot(scores)
-        plt.title("Distribution of Fitness Scores")
-        plt.ylabel("Fitness Score")
+        axs[0, 1].boxplot(self.history_avg)
+        axs[0, 1].set_title("Distribution of Fitness Scores")
+        axs[0, 1].set_ylabel("Fitness Score")
+
+        # Plot average velocity over iterations
+        axs[1, 0].plot(self.hist_velocity)
+        axs[1, 0].set_xlabel("Iterations")
+        axs[1, 0].set_ylabel("Average Velocity")
+        axs[1, 0].set_title("Average Velocity Over Iterations")
+
+        # Plot feature selection frequency
+        axs[1, 1].bar(range(self.num_features), self.feature_selection_count)
+        axs[1, 1].set_xlabel("Feature Index")
+        axs[1, 1].set_ylabel("Selection Frequency")
+        axs[1, 1].set_title("Feature Selection Frequency")
+
+        plt.tight_layout()
         plt.show()
 
         print(f"Total Optimization Duration: {total_duration:.2f} seconds")
-
-        plt.figure()
-        plt.plot(self.hist_velocity)
-        plt.xlabel("Iterations")
-        plt.ylabel("Average Velocity")
-        plt.title("Average Velocity Over Iterations")
-        plt.show()
 
         return self.global_best_position, self.global_best_score

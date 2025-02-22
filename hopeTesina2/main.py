@@ -4,9 +4,6 @@ import matplotlib.pyplot as plt
 from pso_feature_selection import PSOFeatureSelection
 from scenarios import params_selection 
 
-
-
-# Esempio di utilizzo
 if __name__ == "__main__":
     # Definizione dei parametri disponibili
     swarm_sizes = [20, 50, 100, 200, 500]
