@@ -40,44 +40,40 @@ def train_and_evaluate_mlp(X_train, y_train, X_test, y_test, params):
 
     return mlp
 
-def plot_learning_curves(mlp):
-    # Curve di apprendimento e accuratezza per epoca
-    plt.figure(figsize=(12,5))
-    plt.subplot(1,2,1)
-    plt.plot(mlp.loss_curve_, label='Training Loss')
-    plt.xlabel('Epoche')
-    plt.ylabel('Loss')
-    plt.title('Curva di Apprendimento')
-    plt.legend()
+def plot_all(mlp, y_test, y_pred, y_proba):
+    fig, axes = plt.subplots(2, 2, figsize=(15, 10))
 
-    plt.subplot(1,2,2)
-    plt.plot(mlp.validation_scores_, label='Validation Accuracy')
-    plt.xlabel('Epoche')
-    plt.ylabel('Accuracy')
-    plt.title('Accuratezza per epoca')
-    plt.legend()
+    # Curve di apprendimento
+    axes[0, 0].plot(mlp.loss_curve_, label='Training Loss')
+    axes[0, 0].set_xlabel('Epoche')
+    axes[0, 0].set_ylabel('Loss')
+    axes[0, 0].set_title('Curva di Apprendimento')
+    axes[0, 0].legend()
 
-    plt.show()
+    # Accuratezza per epoca
+    axes[0, 1].plot(mlp.validation_scores_, label='Validation Accuracy')
+    axes[0, 1].plot(mlp.loss_curve_, label='Training Accuracy')
+    axes[0, 1].set_xlabel('Epoche')
+    axes[0, 1].set_ylabel('Accuracy')
+    axes[0, 1].set_title('Accuratezza per epoca')
+    axes[0, 1].legend()
 
-def plot_confusion_matrix(y_test, y_pred):
     # Matrice di confusione
     conf_matrix = confusion_matrix(y_test, y_pred)
-    plt.figure(figsize=(6,5))
-    sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues')
-    plt.xlabel('Predetto')
-    plt.ylabel('Reale')
-    plt.title('Matrice di Confusione')
-    plt.show()
+    sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues', ax=axes[1, 0])
+    axes[1, 0].set_xlabel('Predetto')
+    axes[1, 0].set_ylabel('Reale')
+    axes[1, 0].set_title('Matrice di Confusione')
 
-def plot_roc_curve(y_test, y_proba):
     # Curve ROC
-    fpr, tpr, _ = roc_curve(y_test, y_proba[:,1])
+    fpr, tpr, _ = roc_curve(y_test, y_proba[:, 1])
     roc_auc = auc(fpr, tpr)
-    plt.figure()
-    plt.plot(fpr, tpr, label=f'ROC curve (area = {roc_auc:.2f})')
-    plt.plot([0, 1], [0, 1], linestyle='--')
-    plt.xlabel('False Positive Rate')
-    plt.ylabel('True Positive Rate')
-    plt.title('Curve ROC')
-    plt.legend()
+    axes[1, 1].plot(fpr, tpr, label=f'ROC curve (area = {roc_auc:.2f})')
+    axes[1, 1].plot([0, 1], [0, 1], linestyle='--')
+    axes[1, 1].set_xlabel('False Positive Rate')
+    axes[1, 1].set_ylabel('True Positive Rate')
+    axes[1, 1].set_title('Curve ROC')
+    axes[1, 1].legend()
+
+    plt.tight_layout()
     plt.show()

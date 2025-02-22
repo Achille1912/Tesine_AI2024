@@ -30,6 +30,7 @@ class PSOFeatureSelection:
         self.history_avg = []
         self.feature_selection_count = np.zeros(num_features, dtype=int)
         self.hist_velocity = []
+        
 
     def optimize(self):
         plt.ion()
@@ -99,6 +100,8 @@ class PSOFeatureSelection:
 
         # Create a single figure with multiple subplots
         fig, axs = plt.subplots(2, 2, figsize=(12, 10))
+        fig.suptitle(f"PSO with swarm_size={self.subset_size}, w={self.w}, c1={self.c1}, c2={self.c2}")
+
 
         # Plot the history of best and average fitness scores
         axs[0, 0].plot(self.history_best, label="Best Solution", color='b')

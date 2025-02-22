@@ -8,7 +8,7 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score, log_loss, confusion_matrix, roc_curve, auc
 import seaborn as sns
 from scenarios import params_selection
-from mlp_utils import train_and_evaluate_mlp, plot_learning_curves, plot_confusion_matrix, plot_roc_curve
+from mlp_utils import train_and_evaluate_mlp, plot_all
 
 # Caricamento dataset reale
 file_path = "DARWIN.csv"
@@ -94,9 +94,9 @@ while True:
     }
 
     mlp = train_and_evaluate_mlp(X_train, y_train, X_test, y_test, params)
-    plot_learning_curves(mlp)
-    plot_confusion_matrix(y_test, mlp.predict(X_test))
-    plot_roc_curve(y_test, mlp.predict_proba(X_test))
+    y_pred = mlp.predict(X_test)
+    y_proba = mlp.predict_proba(X_test)
+    plot_all(mlp, y_test, y_pred, y_proba)
 
     # Ask the user if they want to run another test
     repeat = input("Do you want to run another test? (y/n): ").lower()
