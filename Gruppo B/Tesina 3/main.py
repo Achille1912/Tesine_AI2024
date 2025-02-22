@@ -7,6 +7,8 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.neural_network import MLPClassifier
 from sklearn.metrics import accuracy_score, log_loss, confusion_matrix, roc_curve, auc
 import seaborn as sns
+from scenarios import params_selection
+from mlp_utils import train_and_evaluate_mlp, plot_learning_curves, plot_confusion_matrix, plot_roc_curve
 
 # Caricamento dataset reale
 file_path = "DARWIN.csv"
@@ -25,140 +27,83 @@ X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
 # Definizione degli scenari
-scenarios = [
-    # ARCHITETTURA E ATTIVAZIONE
-    ## Singolo Layer 200 neuroni
-    {"hidden_layer_sizes": (200,), "activation": 'identity', "solver": 'adam', "alpha": 0.001},     #0
-    {"hidden_layer_sizes": (200,), "activation": 'logistic', "solver": 'adam', "alpha": 0.001},     #1
-    {"hidden_layer_sizes": (200,), "activation": 'tanh', "solver": 'adam', "alpha": 0.001},         #2
-    {"hidden_layer_sizes": (200,), "activation": 'relu', "solver": 'adam', "alpha": 0.001},         #3
-    ## Singolo Layer 400 neuroni
-    {"hidden_layer_sizes": (400,), "activation": 'identity', "solver": 'adam', "alpha": 0.001},     #4
-    {"hidden_layer_sizes": (400,), "activation": 'logistic', "solver": 'adam', "alpha": 0.001},     #5
-    {"hidden_layer_sizes": (400,), "activation": 'tanh', "solver": 'adam', "alpha": 0.001},         #6
-    {"hidden_layer_sizes": (400,), "activation": 'relu', "solver": 'adam', "alpha": 0.001},         #7
 
-    ## Singolo Layer 600 neuroni
-    {"hidden_layer_sizes": (600,), "activation": 'identity', "solver": 'adam', "alpha": 0.001},     #8
-    {"hidden_layer_sizes": (600,), "activation": 'logistic', "solver": 'adam', "alpha": 0.001},     #9
-    {"hidden_layer_sizes": (600,), "activation": 'tanh', "solver": 'adam', "alpha": 0.001},         #10
-    {"hidden_layer_sizes": (600,), "activation": 'relu', "solver": 'adam', "alpha": 0.001},         #11
+# Definizione dei parametri disponibili
+hidden_layer_sizes = [(200,), (400,), (600,), (400,200), (600,300), (800,400), (400,200,100), (600,300,150)]
+activation = ['identity', 'logistic', 'tanh', 'relu']
+solver = ['adam','sdg','lbfgs']
+alpha = [0.0001, 0.001, 0.01, 0.1, 0.5]
+learning_rate_policy = ['constant','invscaling','adaptive']
+learning_rate_init = [0.0001, 0.001, 0.01, 0.1]
+batch_size = [16, 32, 64]
+early_stopping = [True, False]
+validation_fraction = [0.1, 0.15, 0.2]
+N_iter_no_change = [5, 10, 20]
 
-    ## Due Layer (400,200)
-    {"hidden_layer_sizes": (400,200), "activation": 'identity', "solver": 'adam', "alpha": 0.001},  #12
-    {"hidden_layer_sizes": (400,200), "activation": 'logistic', "solver": 'adam', "alpha": 0.001},  #13 
-    {"hidden_layer_sizes": (400,200), "activation": 'tanh', "solver": 'adam', "alpha": 0.001},      #14
-    {"hidden_layer_sizes": (400,200), "activation": 'relu', "solver": 'adam', "alpha": 0.001},      #15
 
-    ## Due Layer (600,300)
-    {"hidden_layer_sizes": (600,300), "activation": 'identity', "solver": 'adam', "alpha": 0.001},  #16
-    {"hidden_layer_sizes": (600,300), "activation": 'logistic', "solver": 'adam', "alpha": 0.001},  #17
-    {"hidden_layer_sizes": (600,300), "activation": 'tanh', "solver": 'adam', "alpha": 0.001},      #18
-    {"hidden_layer_sizes": (600,300), "activation": 'relu', "solver": 'adam', "alpha": 0.001},      #19
+#------------------------------------------
 
-    ## Due Layer (800,400)
-    {"hidden_layer_sizes": (800,400), "activation": 'identity', "solver": 'adam', "alpha": 0.001},  #20
-    {"hidden_layer_sizes": (800,400), "activation": 'logistic', "solver": 'adam', "alpha": 0.001},  #21
-    {"hidden_layer_sizes": (800,400), "activation": 'tanh', "solver": 'adam', "alpha": 0.001},      #22
-    {"hidden_layer_sizes": (800,400), "activation": 'relu', "solver": 'adam', "alpha": 0.001},      #23
+# Loop principale per la selezione dei parametri
 
-    ## Tre Layer (400,200,100)
-    {"hidden_layer_sizes": (400,200,100), "activation": 'identity', "solver": 'adam', "alpha": 0.001},  #24
-    {"hidden_layer_sizes": (400,200,100), "activation": 'logistic', "solver": 'adam', "alpha": 0.001},  #25
-    {"hidden_layer_sizes": (400,200,100), "activation": 'tanh', "solver": 'adam', "alpha": 0.001},      #26 
-    {"hidden_layer_sizes": (400,200,100), "activation": 'relu', "solver": 'adam', "alpha": 0.001},      #27 
+while True:
+    print("\n=== PARAMETER CONFIGURATION ===")
 
-    ## Tre Layer (600,300,150)
-    {"hidden_layer_sizes": (600,300,150), "activation": 'identity', "solver": 'adam', "alpha": 0.001},  #28
-    {"hidden_layer_sizes": (600,300,150), "activation": 'logistic', "solver": 'adam', "alpha": 0.001},  #29 
-    {"hidden_layer_sizes": (600,300,150), "activation": 'tanh', "solver": 'adam', "alpha": 0.001},      #30
-    {"hidden_layer_sizes": (600,300,150), "activation": 'relu', "solver": 'adam', "alpha": 0.001},      #31
+    user_hidden_layer_sizes = params_selection("hidden_layer_sizes", hidden_layer_sizes)
+    if user_hidden_layer_sizes is None: break
 
-    # LEARNING RATE E OTTIMIZZAZIONE
-    ## Learning Rate Init 0.0001
-    {"hidden_layer_sizes": (200,), "activation": 'relu', "solver": 'adam', "alpha": 0.01, 
-        "learning_rate_policy": 'constant', "learning_rate_init": 0.0001, "batch_size": 16},
-    {"hidden_layer_sizes": (200,), "activation": 'relu', "solver": 'adam', "alpha": 0.01, 
-        "learning_rate_policy": 'constant', "learning_rate_init": 0.0001, "batch_size": 23},
-    {"hidden_layer_sizes": (200,), "activation": 'relu', "solver": 'adam', "alpha": 0.01, 
-        "learning_rate_policy": 'constant', "learning_rate_init": 0.0001, "batch_size": 64}
-]
-params = scenarios[0]
+    user_activation = params_selection("activation", activation)
+    if user_activation is None: break
 
-# Loop sugli scenari
+    user_solver = params_selection("solver", solver)
+    if user_solver is None: break
 
-print(f"\nEseguendo scenario: {params}")
-    
-mlp = MLPClassifier(
-    hidden_layer_sizes=params["hidden_layer_sizes"],
-    activation=params["activation"],
-    solver=params["solver"],
-    alpha=params["alpha"],
-    batch_size=params.get("batch_size", 32),
-    learning_rate=params.get("learning_rate_policy", 'constant'),
-    learning_rate_init=params.get("learning_rate_init", 0.001),
-    max_iter=1000,
-    shuffle=True,
-    random_state=42,
-    early_stopping=True,
-    validation_fraction=0.15,
-    n_iter_no_change=10,
-    verbose=True
-)
-    
-# Misurazione del tempo di training
-start_time = time.time()
-history = mlp.fit(X_train, y_train)
-end_time = time.time()
-training_time = end_time - start_time
-   
-# Valutazione del modello
-train_accuracy = accuracy_score(y_train, mlp.predict(X_train))
-test_accuracy = accuracy_score(y_test, mlp.predict(X_test))
-train_loss = log_loss(y_train, mlp.predict_proba(X_train))
-test_loss = log_loss(y_test, mlp.predict_proba(X_test))
-    
-print(f'Tempo di training: {training_time:.2f} secondi')
-print(f'Accuracy Train: {train_accuracy:.4f}, Accuracy Test: {test_accuracy:.4f}')
-print(f'Loss Train: {train_loss:.4f}, Loss Test: {test_loss:.4f}')
-    
-# Curve di apprendimento e accuratezza per epoca
-plt.figure(figsize=(12,5))
-plt.subplot(1,2,1)
-plt.plot(mlp.loss_curve_, label=f'Training Loss')
-plt.xlabel('Epoche')
-plt.ylabel('Loss')
-plt.title(f'Curva di Apprendimento')
-plt.legend()
-    
-plt.subplot(1,2,2)
-plt.plot(mlp.validation_scores_, label=f'Validation Accuracy')
-plt.xlabel('Epoche')
-plt.ylabel('Accuracy')
-plt.title(f'Accuratezza per epoca')
-plt.legend()
-    
-plt.show()
+    user_alpha = params_selection("alpha", alpha)
+    if user_alpha is None: break
 
-# Matrice di confusione
-conf_matrix = confusion_matrix(y_test, mlp.predict(X_test))
-plt.figure(figsize=(6,5))
-sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues')
-plt.xlabel('Predetto')
-plt.ylabel('Reale')
-plt.title(f'Matrice di Confusione')
-plt.show()
+    user_batch_size = params_selection("batch_size", batch_size)
+    if user_batch_size is None: break
+
+    user_learning_rate = params_selection("learning_rate_policy", learning_rate_policy)
+    if user_learning_rate is None: break
+
+    user_learning_rate_init = params_selection("learning_rate_init", learning_rate_init)
+    if user_learning_rate_init is None: break
+
+    user_early_stopping = params_selection("early_stopping", early_stopping)
+    if user_early_stopping is None: break
+
+    user_validation_fraction = params_selection("validation_fraction", validation_fraction)
+    if user_validation_fraction is None: break
+
+    user_N_iter_no_change = params_selection("N_iter_no_change", N_iter_no_change)
+    if user_N_iter_no_change is None: break
+
+    print(f"\n🚀 Running MLP with user_hidden_layer_sizes={user_hidden_layer_sizes}, user_activation={user_activation}, user_solver={user_solver}, user_alpha={user_alpha}, user_batch_size={user_batch_size}\n")
+
+    params = {
+        'hidden_layer_sizes': user_hidden_layer_sizes,
+        'activation': user_activation,
+        'solver': user_solver,
+        'alpha': user_alpha,
+        'batch_size': user_batch_size,
+        'learning_rate_policy': user_learning_rate,
+        'learning_rate_init': user_learning_rate_init,
+        'early_stopping': user_early_stopping,
+        'validation_fraction': user_validation_fraction,
+        'N_iter_no_change': user_N_iter_no_change
+    }
+
+    mlp = train_and_evaluate_mlp(X_train, y_train, X_test, y_test, params)
+    plot_learning_curves(mlp)
+    plot_confusion_matrix(y_test, mlp.predict(X_test))
+    plot_roc_curve(y_test, mlp.predict_proba(X_test))
+
+    # Ask the user if they want to run another test
+    repeat = input("Do you want to run another test? (y/n): ").lower()
+    if repeat != 'y':
+        print("🔚 End of execution.")
+        break
 
 
 
-# Curve ROC
-fpr, tpr, _ = roc_curve(y_test, mlp.predict_proba(X_test)[:,1])
-roc_auc = auc(fpr, tpr)
-plt.figure()
-plt.plot(fpr, tpr, label=f'ROC curve (area = {roc_auc:.2f})')
-plt.plot([0, 1], [0, 1], linestyle='--')
-plt.xlabel('False Positive Rate')
-plt.ylabel('True Positive Rate')
-plt.title(f'Curve ROC')
-plt.legend()
-plt.show()
+
