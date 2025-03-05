@@ -141,12 +141,12 @@ def solve_energy_scenario(network: WirelessNetwork,
         # Calculate and log metrics
         metrics = calculate_mst_metrics(network, mst_edges)
         print(f"\Energy MST Metrics:")
-        print(f"Total Distance: {metrics['total_distance']:.2f}")
+        print(f"Total Distance: {metrics['total_distance']:.2f}m")
         print(f"Max Elevation Difference: {metrics['max_elevation_diff']:.2f}m")
         print(f"Average Elevation Change: {metrics['avg_elevation_change']:.2f}m")
         print(f"Maximum Edge Cost: {metrics['max_edge_cost']:.2f}")
-        print(f"Betweeness Centrality: {metrics['betweenness_centrality']}")
-        print(f"Power Capacity: {metrics['power_capacity']:.2f}")
+        print(f"Betweeness Centrality: Node {metrics['betweenness_centrality']}")
+        print(f"Power Capacity: {metrics['power_capacity']:.2f} W")
 
         return mst_edges
 

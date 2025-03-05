@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import time
-from particle import Particle  # Assicurati di avere la classe Particle in un file separato
+from particle import Particle  
 
 def fitness_function(features_selected, data):
     """
@@ -14,7 +14,8 @@ def fitness_function(features_selected, data):
     return np.mean(correlation[np.triu_indices_from(correlation, k=1)])
 
 class PSOFeatureSelection:
-    def __init__(self, num_particles, num_features, data, subset_size=30, w=0.7, c1=2.0, c2=2.0, max_iter=100):
+    def __init__(self, num_particles, num_features, data, subset_size=30, max_iter=100, 
+                 w=0.7, c1=2.0, c2=2.0, early_stop=False , threshold=10, toll=0):
         self.num_particles = num_particles
         self.num_features = num_features
         self.subset_size = subset_size
@@ -23,6 +24,9 @@ class PSOFeatureSelection:
         self.c1 = c1
         self.c2 = c2
         self.max_iter = max_iter
+        self. early_stop = early_stop
+        self.threshold = threshold
+        self.toll = toll
         self.swarm = [Particle(num_features, subset_size) for _ in range(num_particles)]
         self.global_best_position = None
         self.global_best_score = float('-inf')
@@ -37,6 +41,8 @@ class PSOFeatureSelection:
         fig, ax = plt.subplots()
         
         start_time = time.time()
+
+        convergence_iterator = 0
         
         for iter in range(self.max_iter):
             iter_start_time = time.time()
@@ -75,6 +81,8 @@ class PSOFeatureSelection:
             avg_score = np.mean(scores)
             self.history_best.append(self.global_best_score)
             self.history_avg.append(avg_score)
+
+            
             
             ax.clear()
             ax.plot(self.history_best, label="Best Solution", color='b')
@@ -93,6 +101,19 @@ class PSOFeatureSelection:
             print(f"Average Score: {avg_score}")
             print(f"Iteration Duration: {iter_duration:.2f} seconds")
             print("-" * 50)
+
+
+            # Early stopping condition
+            if self.early_stop:
+                if len(self.history_avg) > 1 and abs(self.history_avg[-1] - self.history_avg[-2]) < self.toll:
+                    convergence_iterator += 1
+                else:
+                    convergence_iterator = 0
+
+                if convergence_iterator >= self.threshold:
+                    print("Early stopping condition reached.")
+                    break
+
         
         total_duration = time.time() - start_time
         plt.ioff()
