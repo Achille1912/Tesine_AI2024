@@ -2,10 +2,13 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import random
+import os
+import psutil
 from pso_feature_selection import PSOFeatureSelection
 from scenarios import params_selection 
 
 if __name__ == "__main__":
+    
     # Definizione dei parametri disponibili
     swarm_sizes = [20, 50, 100, 200, 500]
     w_values = [0.4, 0.6, 0.7, 0.9]
@@ -20,7 +23,7 @@ if __name__ == "__main__":
 
     num_particles = 50
     iterations = 100
-    RUN = 30
+    RUN = 5
     SEED = 42
     random.seed(42)
 
@@ -76,17 +79,31 @@ if __name__ == "__main__":
         
         best_params_dict = None
 
+        run_dict = []
+
         for run in range(RUN):
             pso = PSOFeatureSelection(num_particles, num_features, data, subset_size=user_swarm_size, max_iter=user_iterations, 
                                 w=user_w, c1=user_c1, c2=user_c2, early_stop=user_early_stop,
                                 threshold=user_threshold, toll=user_toll, seed=(SEED+run))            
             params_dict = pso.optimize()
             params_dict["run"] = run+1
-            print(f"Run {run+1}/{RUN} completed.")
+            run_dict.append(params_dict)
             
             if best_params_dict is None or params_dict["global_best_score"] > best_params_dict["global_best_score"]:
                 best_params_dict = params_dict
+            print(f"Run {run+1}/{RUN} completed.") 
         
+        # Calculate stability between runs
+        stability_scores = []
+        for i in range(1, len(run_dict)):
+            stability = np.mean(run_dict[i]["history_avg"]) / np.mean(run_dict[i-1]["history_avg"])
+            stability_scores.append(stability)
+            print(f"Stability between run {i} and run {i+1}: {stability:.4f}")
+
+        avg_stability = np.mean(stability_scores)
+        print(f"Average stability across runs: {avg_stability:.4f}")
+
+
         selected_feature_names = df.columns[best_params_dict["global_best_position"] == 1]
         print("Best feature subset:", selected_feature_names)
         print("Best fitness score:", best_params_dict["global_best_score"])
@@ -115,14 +132,22 @@ if __name__ == "__main__":
         axs[1, 0].set_ylabel("Average Velocity")
         axs[1, 0].set_title("Average Velocity Over Iterations")
 
-        # Plot feature selection frequency
-        axs[1, 1].bar(range(num_features), best_params_dict["feature_selection_count"])
-        axs[1, 1].set_xlabel("Feature Index")
-        axs[1, 1].set_ylabel("Selection Frequency")
-        axs[1, 1].set_title("Feature Selection Frequency")
+        # Plot feature selection frequency using boxplots for the top 15 features
+        feature_selection_count = best_params_dict["feature_selection_count"]
+        top_features_indices = np.argsort(feature_selection_count)[-15:]  # Indici delle top feature
+        feature_selection_data = [feature_selection_count[feature] for feature in top_features_indices]
+
+        axs[1, 1].bar(range(1, 16), feature_selection_data)
+        axs[1, 1].set_xticks(range(1, 16))
+        axs[1, 1].set_xticklabels(df.columns[top_features_indices], rotation=90)
+        axs[1, 1].set_title("Top 15 Feature Selection Frequency")
+        axs[1, 1].set_ylabel("Selection Count")
 
         plt.tight_layout()
         plt.show()
+
+        process = psutil.Process(os.getpid())
+        print(f"Memoria usata: {process.memory_info().rss / 1024 ** 2} MB")
 
 
         # Ask the user if they want to run another test

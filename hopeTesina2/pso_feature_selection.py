@@ -36,6 +36,7 @@ class PSOFeatureSelection:
         self.global_best_score = float('-inf')
         self.history_best = []
         self.history_avg = []
+        self.history_std = []
         self.feature_selection_count = np.zeros(num_features, dtype=int)
         self.hist_velocity = []
         
@@ -81,6 +82,9 @@ class PSOFeatureSelection:
 
                     # Update feature selection count
                     self.feature_selection_count += particle.position
+
+                # Calculate the standard deviation of the positions
+                self.history_std.append(np.std([particle.position for particle in self.swarm], axis=0))
                 
                 self.hist_velocity.append(np.mean(hist_vel_tmp))
                 avg_score = np.mean(scores)
@@ -122,7 +126,9 @@ class PSOFeatureSelection:
             "feature_selection_count": self.feature_selection_count,
             "total_duration": total_duration,
             "global_best_position": self.global_best_position,
-            "global_best_score": self.global_best_score
+            "global_best_score": self.global_best_score,
+            "total_duration": total_duration,
+            "hist_std": self.history_std
         }
 
         # Scrivi la durata totale nel file di log
