@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import random
 from pso_feature_selection import PSOFeatureSelection
 from scenarios import params_selection 
 
@@ -19,6 +20,9 @@ if __name__ == "__main__":
 
     num_particles = 50
     iterations = 100
+    RUN = 30
+    SEED = 42
+    random.seed(42)
 
     # Caricamento del dataset
     df = pd.read_csv("DARWIN.csv")
@@ -38,7 +42,6 @@ if __name__ == "__main__":
     # Aggiorniamo num_features per il numero corretto di feature disponibili
     num_features = data.shape[1]    
    
-    
     while True:
         print("\n=== PSO PARAMETER CONFIGURATION ===")
         user_threshold = 0
@@ -71,22 +74,62 @@ if __name__ == "__main__":
 
         print(f"\n🚀 Running PSO with user_swarm_size={user_swarm_size}, w={user_w}, user_c1={user_c1}, user_c2={user_c2}\n")
         
-        pso = PSOFeatureSelection(num_particles, num_features, data, subset_size=user_swarm_size, max_iter=user_iterations, 
-                              w=user_w, c1=user_c1, c2=user_c2, early_stop=user_early_stop,
-                            threshold=user_threshold, toll=user_toll)
-        best_features, best_score = pso.optimize()
+        best_params_dict = None
+
+        for run in range(RUN):
+            pso = PSOFeatureSelection(num_particles, num_features, data, subset_size=user_swarm_size, max_iter=user_iterations, 
+                                w=user_w, c1=user_c1, c2=user_c2, early_stop=user_early_stop,
+                                threshold=user_threshold, toll=user_toll, seed=(SEED+run))            
+            params_dict = pso.optimize()
+            params_dict["run"] = run+1
+            print(f"Run {run+1}/{RUN} completed.")
+            
+            if best_params_dict is None or params_dict["global_best_score"] > best_params_dict["global_best_score"]:
+                best_params_dict = params_dict
         
-        selected_feature_names = df.columns[best_features == 1]
+        selected_feature_names = df.columns[best_params_dict["global_best_position"] == 1]
         print("Best feature subset:", selected_feature_names)
-        print("Fitness score:", best_score)
+        print("Best fitness score:", best_params_dict["global_best_score"])
+
+
+        # Create a single figure with multiple subplots
+        fig, axs = plt.subplots(2, 2, figsize=(12, 10))
+        fig.suptitle(f"PSO with swarm_size={user_swarm_size}, w={user_w}, c1={user_c1}, c2={user_c2}")
+
+        # Plot the history of best and average fitness scores
+        axs[0, 0].plot(best_params_dict["history_best"], label="Best Solution", color='b')
+        axs[0, 0].plot(best_params_dict["history_avg"], label="Avg Solution", color='r')
+        axs[0, 0].set_xlabel("Iterations")
+        axs[0, 0].set_ylabel("Fitness Score")
+        axs[0, 0].set_title("Fitness Score Over Iterations")
+        axs[0, 0].legend()
+
+        # Boxplot for fitness score distribution
+        axs[0, 1].boxplot(best_params_dict["history_avg"])
+        axs[0, 1].set_title("Distribution of Fitness Scores")
+        axs[0, 1].set_ylabel("Fitness Score")
+
+        # Plot average velocity over iterations
+        axs[1, 0].plot(best_params_dict["hist_velocity"])
+        axs[1, 0].set_xlabel("Iterations")
+        axs[1, 0].set_ylabel("Average Velocity")
+        axs[1, 0].set_title("Average Velocity Over Iterations")
+
+        # Plot feature selection frequency
+        axs[1, 1].bar(range(num_features), best_params_dict["feature_selection_count"])
+        axs[1, 1].set_xlabel("Feature Index")
+        axs[1, 1].set_ylabel("Selection Frequency")
+        axs[1, 1].set_title("Feature Selection Frequency")
+
+        plt.tight_layout()
+        plt.show()
+
 
         # Ask the user if they want to run another test
         repeat = input("Do you want to run another test? (y/n): ").lower()
         if repeat != 'y':
             print("🔚 End of execution.")
             break
-    
-    
 
 
 
@@ -97,4 +140,5 @@ if __name__ == "__main__":
 
 
 
-        
+
+

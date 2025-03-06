@@ -1,7 +1,9 @@
 import numpy as np
+import random
 
 class Particle:
-    def __init__(self, num_features, subset_size=30):
+    def __init__(self, num_features, subset_size=30, seed=42):
+        np.random.seed(seed)
         self.num_features = num_features
         self.subset_size = subset_size
         self.position = np.zeros(num_features, dtype=int)
