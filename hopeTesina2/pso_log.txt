@@ -14,7 +14,7 @@ Global Best Position: [0 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0
  0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 0 0 0]
 Average Score: 0.13250965989876404
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 2/100
 Global Best Score: 0.15017703862416867
@@ -32,7 +32,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 3/100
 Global Best Score: 0.15017703862416867
@@ -140,7 +140,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 9/100
 Global Best Score: 0.15017703862416867
@@ -158,7 +158,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.15 seconds
 --------------------------------------------------
 Iteration 10/100
 Global Best Score: 0.15017703862416867
@@ -194,7 +194,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.13 seconds
+Iteration Duration: 0.14 seconds
 --------------------------------------------------
 Iteration 12/100
 Global Best Score: 0.15017703862416867
@@ -212,7 +212,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.13 seconds
+Iteration Duration: 0.14 seconds
 --------------------------------------------------
 Iteration 13/100
 Global Best Score: 0.15017703862416867
@@ -302,7 +302,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.15 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 18/100
 Global Best Score: 0.15017703862416867
@@ -320,7 +320,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.15 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 19/100
 Global Best Score: 0.15017703862416867
@@ -338,7 +338,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.15 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 20/100
 Global Best Score: 0.15017703862416867
@@ -356,7 +356,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 21/100
 Global Best Score: 0.15017703862416867
@@ -410,7 +410,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.11 seconds
+Iteration Duration: 0.14 seconds
 --------------------------------------------------
 Iteration 24/100
 Global Best Score: 0.15017703862416867
@@ -428,7 +428,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.11 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 25/100
 Global Best Score: 0.15017703862416867
@@ -446,7 +446,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.11 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 26/100
 Global Best Score: 0.15017703862416867
@@ -464,7 +464,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.11 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 27/100
 Global Best Score: 0.15017703862416867
@@ -482,7 +482,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.11 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 28/100
 Global Best Score: 0.15017703862416867
@@ -500,7 +500,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.11 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 29/100
 Global Best Score: 0.15017703862416867
@@ -518,7 +518,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.11 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 30/100
 Global Best Score: 0.15017703862416867
@@ -536,7 +536,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.15 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 31/100
 Global Best Score: 0.15017703862416867
@@ -554,7 +554,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.15 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 32/100
 Global Best Score: 0.15017703862416867
@@ -572,7 +572,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 33/100
 Global Best Score: 0.15017703862416867
@@ -590,7 +590,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 34/100
 Global Best Score: 0.15017703862416867
@@ -608,7 +608,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 35/100
 Global Best Score: 0.15017703862416867
@@ -626,7 +626,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 36/100
 Global Best Score: 0.15017703862416867
@@ -662,7 +662,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.15 seconds
 --------------------------------------------------
 Iteration 38/100
 Global Best Score: 0.15017703862416867
@@ -680,7 +680,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.15 seconds
 --------------------------------------------------
 Iteration 39/100
 Global Best Score: 0.15017703862416867
@@ -698,7 +698,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 40/100
 Global Best Score: 0.15017703862416867
@@ -716,7 +716,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 41/100
 Global Best Score: 0.15017703862416867
@@ -734,7 +734,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 42/100
 Global Best Score: 0.15017703862416867
@@ -752,7 +752,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 43/100
 Global Best Score: 0.15017703862416867
@@ -770,7 +770,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 44/100
 Global Best Score: 0.15017703862416867
@@ -788,7 +788,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 45/100
 Global Best Score: 0.15017703862416867
@@ -806,7 +806,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 46/100
 Global Best Score: 0.15017703862416867
@@ -824,7 +824,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 47/100
 Global Best Score: 0.15017703862416867
@@ -842,7 +842,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 48/100
 Global Best Score: 0.15017703862416867
@@ -860,7 +860,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 49/100
 Global Best Score: 0.15017703862416867
@@ -878,7 +878,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 50/100
 Global Best Score: 0.15017703862416867
@@ -896,7 +896,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 51/100
 Global Best Score: 0.15017703862416867
@@ -914,7 +914,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.15 seconds
 --------------------------------------------------
 Iteration 52/100
 Global Best Score: 0.15017703862416867
@@ -986,7 +986,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 56/100
 Global Best Score: 0.15017703862416867
@@ -1004,7 +1004,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 57/100
 Global Best Score: 0.15017703862416867
@@ -1040,7 +1040,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.16 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 59/100
 Global Best Score: 0.15017703862416867
@@ -1058,7 +1058,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.15 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 60/100
 Global Best Score: 0.15017703862416867
@@ -1076,7 +1076,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 61/100
 Global Best Score: 0.15017703862416867
@@ -1094,7 +1094,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 62/100
 Global Best Score: 0.15017703862416867
@@ -1166,7 +1166,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.13 seconds
+Iteration Duration: 0.14 seconds
 --------------------------------------------------
 Iteration 66/100
 Global Best Score: 0.15017703862416867
@@ -1202,7 +1202,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.13 seconds
+Iteration Duration: 0.14 seconds
 --------------------------------------------------
 Iteration 68/100
 Global Best Score: 0.15017703862416867
@@ -1220,7 +1220,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.13 seconds
+Iteration Duration: 0.14 seconds
 --------------------------------------------------
 Iteration 69/100
 Global Best Score: 0.15017703862416867
@@ -1274,7 +1274,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 72/100
 Global Best Score: 0.15017703862416867
@@ -1292,7 +1292,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.15 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 73/100
 Global Best Score: 0.15017703862416867
@@ -1310,7 +1310,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 74/100
 Global Best Score: 0.15017703862416867
@@ -1328,7 +1328,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 75/100
 Global Best Score: 0.15017703862416867
@@ -1346,7 +1346,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 76/100
 Global Best Score: 0.15017703862416867
@@ -1364,7 +1364,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 77/100
 Global Best Score: 0.15017703862416867
@@ -1382,7 +1382,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 78/100
 Global Best Score: 0.15017703862416867
@@ -1400,7 +1400,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 79/100
 Global Best Score: 0.15017703862416867
@@ -1436,7 +1436,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 81/100
 Global Best Score: 0.15017703862416867
@@ -1454,7 +1454,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 82/100
 Global Best Score: 0.15017703862416867
@@ -1508,7 +1508,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 85/100
 Global Best Score: 0.15017703862416867
@@ -1526,7 +1526,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 86/100
 Global Best Score: 0.15017703862416867
@@ -1544,7 +1544,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 87/100
 Global Best Score: 0.15017703862416867
@@ -1562,7 +1562,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 88/100
 Global Best Score: 0.15017703862416867
@@ -1670,7 +1670,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.13 seconds
+Iteration Duration: 0.14 seconds
 --------------------------------------------------
 Iteration 94/100
 Global Best Score: 0.15017703862416867
@@ -1778,7 +1778,7 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.14 seconds
+Iteration Duration: 0.13 seconds
 --------------------------------------------------
 Iteration 100/100
 Global Best Score: 0.15017703862416867
@@ -1796,6 +1796,6 @@ Global Best Position: [0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  0 1 0 0 0 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0 1 0
  0 0 0 0]
 Average Score: 0.15017703862416867
-Iteration Duration: 0.20 seconds
+Iteration Duration: 0.14 seconds
 --------------------------------------------------
-Total Optimization Duration: 13.65 seconds
+Total Optimization Duration: 13.52 seconds

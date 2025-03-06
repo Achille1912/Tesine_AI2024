@@ -146,6 +146,31 @@ if __name__ == "__main__":
         plt.tight_layout()
         plt.show()
 
+        # Create a new figure for additional plots
+        fig2, axs2 = plt.subplots(1, 2, figsize=(12, 5))
+        fig2.suptitle("Additional PSO Analysis")
+        # Plot the convergence curve of the best fitness score
+        axs2[0].plot(best_params_dict["hist_std"], label="std", color='g')
+        axs2[0].set_xlabel("Iterations")
+        axs2[0].set_ylabel("Standard Deviation")
+        axs2[0].set_title("Swarm Diversity Over Iterations of the Best Run")
+        axs2[0].legend()
+
+        
+
+        # Plot the convergence curve of the average fitness score
+        axs2[1].bar(range(1, len(stability_scores) + 1), stability_scores)
+        axs2[1].set_xlabel("RUNS")
+        axs2[1].set_xticks(range(1, len(stability_scores) + 1))
+        axs2[1].set_xticklabels([f"RUN {i} with RUN {i+1}" for i in range(1, len(stability_scores) + 1)])
+        axs2[1].set_ylabel("Stability Coefficient") 
+        axs2[1].set_title("Stability Coefficient between Runs")
+
+        print(stability_scores)
+
+        plt.tight_layout()
+        plt.show()
+
         process = psutil.Process(os.getpid())
         print(f"Memoria usata: {process.memory_info().rss / 1024 ** 2} MB")
 
