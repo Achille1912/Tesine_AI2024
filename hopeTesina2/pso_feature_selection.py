@@ -4,32 +4,15 @@ import time
 import seaborn as sns
 from particle import Particle  
 from scipy.stats import spearmanr
+from utils import hamming_distance, normalized_exploitation, normalized_exploration 
 
-
-
-def hamming_distance(x, y):
-    return np.sum(np.abs(x - y))
-
-def normalized_exploitation(population, best_solution):
-    dim = len(best_solution)
-    mean_hamming = np.mean([hamming_distance(ind.position, best_solution) for ind in population])
-    return 1 - (mean_hamming / dim)
-
-def normalized_exploration(population):
-    num_particles = len(population)
-    dim = len(population[0].position)
-    mean_pairwise_distance = np.mean([
-        hamming_distance(population[i].position, population[j].position)
-        for i in range(num_particles) for j in range(i + 1, num_particles)
-    ])
-    return mean_pairwise_distance / dim  # Normalizziamo tra 0 e 1
 
 def fitness_function(features_selected, data):
     """
-    Funzione fitness basata sulla correlazione di Spearman tra le feature selezionate.
+    Fitness function based on Spearman correlation between selected features.
     """
     if np.sum(features_selected) == 0:
-        return 0  # Evita subset vuoti
+        return 0  # Avoid empty subsets
     selected_data = data[:, features_selected == 1]
     correlation, _ = spearmanr(selected_data, axis=0)
     correlation = np.abs(correlation)
@@ -48,7 +31,7 @@ class PSOFeatureSelection:
         self.c1 = c1
         self.c2 = c2
         self.max_iter = max_iter
-        self. early_stop = early_stop
+        self.early_stop = early_stop
         self.threshold = threshold
         self.toll = toll
         self.swarm = [Particle(num_features, subset_size, seed) for _ in range(num_particles)]
@@ -57,7 +40,7 @@ class PSOFeatureSelection:
         self.history_best = []
         self.history_avg = []
         self.history_std = []
-        self.feature_selection_count = np.zeros(num_features, dtype=int)
+        self.feature_selection_count = np.zeros(self.num_features, dtype=int)
         self.hist_velocity = []
         self.hist_exploration = []
         self.hist_exploitation = []
@@ -71,7 +54,7 @@ class PSOFeatureSelection:
         convergence_iterator = 0
 
 
-        # Apri il file di log
+        # Open the log file
         with open("pso_log.txt", "w") as log_file:
             for iter in range(self.max_iter):
                 iter_start_time = time.time()
@@ -118,7 +101,7 @@ class PSOFeatureSelection:
                 
 
                 
-                # Scrivi i messaggi di debug nel file di log
+                # Write debug messages to the log file
                 iter_end_time = time.time()
                 iter_duration = iter_end_time - iter_start_time
                 log_file.write(f"Iteration {iter + 1}/{self.max_iter}\n")
@@ -163,7 +146,7 @@ class PSOFeatureSelection:
 
       
 
-        # Scrivi la durata totale nel file di log
+        # Write the total duration to the log file
         with open("pso_log.txt", "a") as log_file:
             log_file.write(f"Total Optimization Duration: {total_duration:.2f} seconds\n")
 
@@ -171,4 +154,3 @@ class PSOFeatureSelection:
         return params
 
 
-        

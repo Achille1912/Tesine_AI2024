@@ -6,10 +6,11 @@ import os
 import psutil
 from pso_feature_selection import PSOFeatureSelection
 from scenarios import params_selection 
+from plot_utils import plot_results  # Import the visualization function
 
 if __name__ == "__main__":
     
-    # Definizione dei parametri disponibili
+    # Definition of available parameters
     swarm_sizes = [20, 50, 100, 200, 500]
     w_values = [0.4, 0.6, 0.7, 0.9]
     c1_values = [1.0, 1.5, 2.0, 2.5]
@@ -27,22 +28,22 @@ if __name__ == "__main__":
     SEED = 42
     random.seed(42)
 
-    # Caricamento del dataset
+    # Loading the dataset
     df = pd.read_csv("DARWIN.csv")
 
-    # Selezione solo delle colonne numeriche, escludendo la prima e l'ultima colonna
+    # Select only numeric columns, excluding the first and last column
     df = df.select_dtypes(include=[np.number]).iloc[:, 1:-1]
 
-    # Gestione valori mancanti: rimpiazziamo con la media della colonna
+    # Handle missing values: replace with column mean
     df.fillna(df.mean(), inplace=True)
 
-    # Normalizzazione (opzionale)
+    # Normalization (optional)
     df = (df - df.min()) / (df.max() - df.min())
 
-    # Conversione in numpy array per PSO
+    # Convert to numpy array for PSO
     data = df.to_numpy()
 
-    # Aggiorniamo num_features per il numero corretto di feature disponibili
+    # Update num_features to the correct number of available features
     num_features = data.shape[1]    
    
     while True:
@@ -108,106 +109,16 @@ if __name__ == "__main__":
         print("Best feature subset:", selected_feature_names)
         print("Best fitness score:", best_params_dict["global_best_score"])
 
-
-        # Create a single figure with multiple subplots
-        fig, axs = plt.subplots(2, 2, figsize=(12, 10))
-        fig.suptitle(f"PSO with swarm_size={user_swarm_size}, w={user_w}, c1={user_c1}, c2={user_c2}")
-
-        # Plot the history of best and average fitness scores
-        axs[0, 0].plot(best_params_dict["history_best"], label="Best Solution", color='b')
-        axs[0, 0].plot(best_params_dict["history_avg"], label="Avg Solution", color='r')
-        axs[0, 0].set_xlabel("Iterations")
-        axs[0, 0].set_ylabel("Fitness Score")
-        axs[0, 0].set_title("Fitness Score Over Iterations")
-        axs[0, 0].legend()
-
-        # Boxplot for fitness score distribution
-        axs[0, 1].boxplot(best_params_dict["history_avg"])
-        axs[0, 1].set_title("Distribution of Fitness Scores")
-        axs[0, 1].set_ylabel("Fitness Score")
-
-        # Plot average velocity over iterations
-        axs[1, 0].plot(best_params_dict["hist_velocity"])
-        axs[1, 0].set_xlabel("Iterations")
-        axs[1, 0].set_ylabel("Average Velocity")
-        axs[1, 0].set_title("Average Velocity Over Iterations")
-
-        # Plot feature selection frequency using boxplots for the top 15 features
-        feature_selection_count = best_params_dict["feature_selection_count"]
-        top_features_indices = np.argsort(feature_selection_count)[-15:][::-1]  
-        feature_selection_data = [feature_selection_count[feature] for feature in top_features_indices]
-
-        axs[1, 1].bar(range(1, 16), feature_selection_data)
-        axs[1, 1].set_xticks(range(1, 16))
-        axs[1, 1].set_xticklabels(df.columns[top_features_indices], rotation=90)
-        axs[1, 1].set_title("Top 15 Feature Selection Frequency")
-        axs[1, 1].set_ylabel("Selection Count")
-
-        plt.tight_layout()
-        plt.show()
-
-        # Create a new figure for additional plots
-        fig2, axs2 = plt.subplots(2, 2, figsize=(12, 5))
-        fig2.suptitle("Additional PSO Analysis")
-        # Plot the convergence curve of the best fitness score
-        axs2[0][0].plot(best_params_dict["hist_std"], label="std", color='g')
-        axs2[0][0].set_xlabel("Iterations")
-        axs2[0][0].set_ylabel("Standard Deviation")
-        axs2[0][0].set_title("Swarm Diversity Over Iterations of the Best Run")
-        axs2[0][0].legend()
-
-        
-
-        # Plot the convergence curve of the average fitness score
-        axs2[0][1].bar(range(1, len(stability_scores) + 1), stability_scores)
-        axs2[0][1].set_xlabel("RUNS")
-        axs2[0][1].set_xticks(range(1, len(stability_scores) + 1))
-        axs2[0][1].set_xticklabels([f" {i} & {i+1}" for i in range(1, len(stability_scores) + 1)])
-        axs2[0][1].set_ylabel("Stability Coefficient") 
-        axs2[0][1].set_title("Stability Coefficient between Runs")
-
-
-        # Plot Exploration vs Exploitation on the same graph
-        axs2[1][0].plot(best_params_dict["hist_exploitation"], label="Exploitation ", color='r')
-        axs2[1][0].plot(best_params_dict["hist_exploration"], label="Exploration ", color='b')
-        axs2[1][0].set_xlabel("Iteration")
-        axs2[1][0].set_ylabel("Value")
-        axs2[1][0].set_title("Exploration vs Exploitation Over Time")
-        axs2[1][0].legend()
-
         process = psutil.Process(os.getpid())
         memory_used = round(process.memory_info().rss / 1024 ** 2, 2)
-        print(f"Memoria usata: {memory_used} MB")
+        print(f"Memory used: {memory_used} MB")
         total_duration = best_params_dict["total_duration"]
 
-        # Plot execution time over iterations
-        axs2[1][1].text(0.5, 0.6, f"Memoria usata: {memory_used} MB", fontsize=15, ha="center", va="center")
-        axs2[1][1].text(0.5, 0.4, f"Durata totale: {total_duration:.2f} s", fontsize=15, ha="center", va="center")
-        axs2[1][1].set_xticks([])
-        axs2[1][1].set_yticks([])
-        axs2[1][1].set_frame_on(True)
-
-
-        plt.tight_layout()
-        plt.show()
-
-       
-
+        # Call the visualization function
+        plot_results(best_params_dict, run_dict, stability_scores, df, user_swarm_size, user_w, user_c1, user_c2, memory_used, total_duration)
 
         # Ask the user if they want to run another test
         repeat = input("Do you want to run another test? (y/n): ").lower()
         if repeat != 'y':
             print("🔚 End of execution.")
             break
-
-
-
-
-
-
-
-
-
-
-
-
