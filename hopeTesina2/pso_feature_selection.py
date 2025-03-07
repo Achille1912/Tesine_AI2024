@@ -1,8 +1,28 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import time
+import seaborn as sns
 from particle import Particle  
 from scipy.stats import spearmanr
+
+
+
+def hamming_distance(x, y):
+    return np.sum(np.abs(x - y))
+
+def normalized_exploitation(population, best_solution):
+    dim = len(best_solution)
+    mean_hamming = np.mean([hamming_distance(ind.position, best_solution) for ind in population])
+    return 1 - (mean_hamming / dim)
+
+def normalized_exploration(population):
+    num_particles = len(population)
+    dim = len(population[0].position)
+    mean_pairwise_distance = np.mean([
+        hamming_distance(population[i].position, population[j].position)
+        for i in range(num_particles) for j in range(i + 1, num_particles)
+    ])
+    return mean_pairwise_distance / dim  # Normalizziamo tra 0 e 1
 
 def fitness_function(features_selected, data):
     """
@@ -39,6 +59,8 @@ class PSOFeatureSelection:
         self.history_std = []
         self.feature_selection_count = np.zeros(num_features, dtype=int)
         self.hist_velocity = []
+        self.hist_exploration = []
+        self.hist_exploitation = []
         
 
     def optimize(self):
@@ -47,6 +69,7 @@ class PSOFeatureSelection:
         start_time = time.time()
 
         convergence_iterator = 0
+
 
         # Apri il file di log
         with open("pso_log.txt", "w") as log_file:
@@ -90,6 +113,9 @@ class PSOFeatureSelection:
                 avg_score = np.mean(scores)
                 self.history_best.append(self.global_best_score)
                 self.history_avg.append(avg_score)
+                self.hist_exploration.append(normalized_exploration(self.swarm))
+                self.hist_exploitation.append(normalized_exploitation(self.swarm, self.global_best_position))
+                
 
                 
                 # Scrivi i messaggi di debug nel file di log
@@ -117,7 +143,8 @@ class PSOFeatureSelection:
         
         total_duration = time.time() - start_time
 
-
+        
+        
         ##############################################
         params = {
             "history_best": self.history_best,
@@ -128,10 +155,13 @@ class PSOFeatureSelection:
             "global_best_position": self.global_best_position,
             "global_best_score": self.global_best_score,
             "total_duration": total_duration,
-            "hist_std": self.history_std
+            "hist_std": self.history_std,
+            "hist_exploration" : self.hist_exploration,
+            "hist_exploitation" : self.hist_exploitation
         }
 
-        print(params["hist_std"])
+
+      
 
         # Scrivi la durata totale nel file di log
         with open("pso_log.txt", "a") as log_file:
