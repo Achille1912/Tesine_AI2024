@@ -1,10 +1,11 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import random
 
-def plot_results(best_params_dict, run_dict, stability_scores, df, user_swarm_size, user_w, user_c1, user_c2, memory_used, total_duration):
+def plot_results(best_params_dict, run_dict, stability_scores, df, user_swarm_size, user_w, user_c1, user_c2, memory_used, total_duration, seed):
     # Create a single figure with multiple subplots
     fig, axs = plt.subplots(2, 2, figsize=(12, 10))
-    fig.suptitle(f"PSO with swarm_size={user_swarm_size}, w={user_w}, c1={user_c1}, c2={user_c2}")
+    fig.suptitle(f"PSO with swarm_size={user_swarm_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed = {seed}")
 
     # Plot the history of best and average fitness scores
     axs[0, 0].plot(best_params_dict["history_best"], label="Best Solution", color='b')
@@ -30,7 +31,7 @@ def plot_results(best_params_dict, run_dict, stability_scores, df, user_swarm_si
     top_features_indices = np.argsort(feature_selection_count)[-15:][::-1]  
     feature_selection_data = [feature_selection_count[feature] for feature in top_features_indices]
 
-    axs[1, 1].bar(range(1, 16), feature_selection_data)
+    axs[1, 1].bar(range(1, 16), feature_selection_data, color='green')
     axs[1, 1].set_xticks(range(1, 16))
     axs[1, 1].set_xticklabels(df.columns[top_features_indices], rotation=90)
     axs[1, 1].set_title("Top 15 Feature Selection Frequency")
@@ -41,7 +42,7 @@ def plot_results(best_params_dict, run_dict, stability_scores, df, user_swarm_si
 
     # Create a new figure for additional plots
     fig2, axs2 = plt.subplots(2, 2, figsize=(12, 5))
-    fig2.suptitle("Additional PSO Analysis")
+    fig2.suptitle(f"Additional PSO Analysis with swarm_size={user_swarm_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed={seed}")
     # Plot the convergence curve of the best fitness score
     axs2[0][0].plot(best_params_dict["hist_std"], label="std", color='g')
     axs2[0][0].set_xlabel("Iterations")
@@ -53,7 +54,7 @@ def plot_results(best_params_dict, run_dict, stability_scores, df, user_swarm_si
     axs2[0][1].bar(range(1, len(stability_scores) + 1), stability_scores)
     axs2[0][1].set_xlabel("RUNS")
     axs2[0][1].set_xticks(range(1, len(stability_scores) + 1))
-    axs2[0][1].set_xticklabels([f" {i} & {i+1}" for i in range(1, len(stability_scores) + 1)])
+    axs2[0][1].set_xticklabels([f" {i} , {i+1}" for i in range(1, len(stability_scores) + 1)], rotation=90)
     axs2[0][1].set_ylabel("Stability Coefficient") 
     axs2[0][1].set_title("Stability Coefficient between Runs")
 

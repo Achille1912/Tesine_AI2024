@@ -115,7 +115,7 @@ if __name__ == "__main__":
         total_duration = best_params_dict["total_duration"]
 
         # Call the visualization function
-        plot_results(best_params_dict, run_dict, stability_scores, df, user_swarm_size, user_w, user_c1, user_c2, memory_used, total_duration)
+        plot_results(best_params_dict, run_dict, stability_scores, df, user_swarm_size, user_w, user_c1, user_c2, memory_used, total_duration, SEED+run )
 
         # Ask the user if they want to run another test
         repeat = input("Do you want to run another test? (y/n): ").lower()
