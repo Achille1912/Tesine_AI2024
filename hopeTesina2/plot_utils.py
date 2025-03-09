@@ -12,7 +12,7 @@ def plot_results(best_params_dict, run_dict, stability_scores, df, user_swarm_si
     axs[0, 0].plot(best_params_dict["history_avg"], label="Avg Solution", color='r')
     axs[0, 0].set_xlabel("Iterations")
     axs[0, 0].set_ylabel("Fitness Score")
-    axs[0, 0].set_title("Fitness Score Over Iterations")
+    axs[0, 0].set_title("Fitness Score Over Iterations (gbest = {:.4f})".format(best_params_dict["global_best_score"]))
     axs[0, 0].legend()
 
     # Boxplot for fitness score distribution
