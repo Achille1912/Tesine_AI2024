@@ -127,7 +127,6 @@ class PSOFeatureSelection:
         total_duration = time.time() - start_time
 
         
-        
         ##############################################
         params = {
             "history_best": self.history_best,

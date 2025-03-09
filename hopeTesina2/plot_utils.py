@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
-import random
+import os
 
 def plot_results(best_params_dict, run_dict, stability_scores, df, user_swarm_size, user_w, user_c1, user_c2, memory_used, total_duration, seed):
     # Create a single figure with multiple subplots
@@ -38,11 +38,17 @@ def plot_results(best_params_dict, run_dict, stability_scores, df, user_swarm_si
     axs[1, 1].set_ylabel("Selection Count")
 
     plt.tight_layout()
+
+    # Save the first plot
+    if not os.path.exists("plots"):
+        os.makedirs("plots")
+    fig.savefig(f"plots/PSO Analysis with swarm_size={user_swarm_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed={seed}.png")
+
     plt.show()
 
     # Create a new figure for additional plots
     fig2, axs2 = plt.subplots(2, 2, figsize=(12, 5))
-    fig2.suptitle(f"Additional PSO Analysis with swarm_size={user_swarm_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed={seed}")
+    fig2.suptitle(f"PSO Analysis with swarm_size={user_swarm_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed={seed}")
     # Plot the convergence curve of the best fitness score
     axs2[0][0].plot(best_params_dict["hist_std"], label="std", color='g')
     axs2[0][0].set_xlabel("Iterations")
@@ -67,11 +73,15 @@ def plot_results(best_params_dict, run_dict, stability_scores, df, user_swarm_si
     axs2[1][0].legend()
 
     # Plot execution time over iterations
-    axs2[1][1].text(0.5, 0.6, f"Memoria usata: {memory_used} MB", fontsize=15, ha="center", va="center")
-    axs2[1][1].text(0.5, 0.4, f"Durata totale: {total_duration:.2f} s", fontsize=15, ha="center", va="center")
+    axs2[1][1].text(0.5, 0.6, f"Memory used: {memory_used} MB", fontsize=15, ha="center", va="center")
+    axs2[1][1].text(0.5, 0.4, f"Total duration: {total_duration:.2f} s", fontsize=15, ha="center", va="center")
     axs2[1][1].set_xticks([])
     axs2[1][1].set_yticks([])
     axs2[1][1].set_frame_on(True)
 
     plt.tight_layout()
+
+    # Save the second plot
+    fig2.savefig(f"plots/PSO Analysis with swarm_size={user_swarm_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed={seed}_additional.png")
+
     plt.show()
