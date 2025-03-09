@@ -33,7 +33,7 @@ def plot_results(best_params_dict, run_dict, stability_scores, df, user_swarm_si
 
     axs[1, 1].bar(range(1, 16), feature_selection_data, color='green')
     axs[1, 1].set_xticks(range(1, 16))
-    axs[1, 1].set_xticklabels(df.columns[top_features_indices], rotation=90)
+    axs[1, 1].set_xticklabels(df.columns[top_features_indices], rotation=90, fontsize=8)
     axs[1, 1].set_title("Top 15 Feature Selection Frequency")
     axs[1, 1].set_ylabel("Selection Count")
 
