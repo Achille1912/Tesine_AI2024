@@ -24,7 +24,7 @@ if __name__ == "__main__":
 
     num_particles = 50
     iterations = 100
-    RUN = 2
+    RUN = 30
     SEED = 42
     random.seed(42)
 
@@ -50,6 +50,7 @@ if __name__ == "__main__":
         print("\n=== PSO PARAMETER CONFIGURATION ===")
         user_threshold = 0
         user_toll = 0
+        
 
         user_swarm_size = params_selection("user_swarm_size", swarm_sizes)
         if user_swarm_size is None: break  
@@ -87,7 +88,7 @@ if __name__ == "__main__":
                                 w=user_w, c1=user_c1, c2=user_c2, early_stop=user_early_stop,
                                 threshold=user_threshold, toll=user_toll, seed=(SEED+run))            
             params_dict = pso.optimize()
-            params_dict["run"] = run+1
+            params_dict["run"] = run
             run_dict.append(params_dict)
             
             if best_params_dict is None or params_dict["global_best_score"] > best_params_dict["global_best_score"]:
@@ -115,7 +116,7 @@ if __name__ == "__main__":
         total_duration = best_params_dict["total_duration"]
 
         # Call the visualization function
-        plot_results(best_params_dict, run_dict, stability_scores, df, user_swarm_size, user_w, user_c1, user_c2, memory_used, total_duration, SEED+run )
+        plot_results(best_params_dict, run_dict, stability_scores, df, user_swarm_size, user_w, user_c1, user_c2, memory_used, total_duration, best_params_dict["run"]+42)
 
         # Ask the user if they want to run another test
         repeat = input("Do you want to run another test? (y/n): ").lower()

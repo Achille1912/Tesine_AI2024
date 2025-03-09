@@ -1,5 +1,5 @@
 import numpy as np
-import seaborn as sns
+
 
 def hamming_distance(x, y):
     return np.sum(np.abs(x - y))
@@ -18,13 +18,3 @@ def normalized_exploration(population):
     ])
     return mean_pairwise_distance / dim  # Normalize between 0 and 1
 
-def fitness_function(features_selected, data):
-    """
-    Fitness function based on Spearman correlation between selected features.
-    """
-    if np.sum(features_selected) == 0:
-        return 0  # Avoid empty subsets
-    selected_data = data[:, features_selected == 1]
-    correlation, _ = spearmanr(selected_data, axis=0)
-    correlation = np.abs(correlation)
-    return np.mean(correlation[np.triu_indices_from(correlation, k=1)])
