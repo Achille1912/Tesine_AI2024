@@ -115,6 +115,11 @@ if __name__ == "__main__":
         print(f"Memory used: {memory_used} MB")
         total_duration = best_params_dict["total_duration"]
 
+
+        with open("pso_log.txt", "a") as log_file:
+            log_file.write(f"best w {user_w}: {best_params_dict['history_best']}\n")
+            log_file.write(f"avg w {user_w}: {best_params_dict['history_avg']}\n")
+
         # Call the visualization function
         plot_results(best_params_dict, run_dict, stability_scores, df, user_swarm_size, user_w, user_c1, user_c2, memory_used, total_duration, best_params_dict["run"]+42, user_iterations, user_early_stop, user_threshold, user_toll)
 

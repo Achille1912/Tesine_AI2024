@@ -4,7 +4,7 @@ import time
 import seaborn as sns
 from particle import Particle  
 from scipy.stats import spearmanr
-from utils import hamming_distance, normalized_exploitation, normalized_exploration 
+from utils import normalized_exploitation, normalized_exploration 
 
 
 def fitness_function(features_selected, data):
@@ -54,74 +54,66 @@ class PSOFeatureSelection:
         convergence_iterator = 0
 
 
-        # Open the log file
-        with open("pso_log.txt", "w") as log_file:
-            for iter in range(self.max_iter):
-                iter_start_time = time.time()
-                scores = []
-                hist_vel_tmp = []
-                for particle in self.swarm:
-                    fitness = fitness_function(particle.position, self.data)
-                    scores.append(fitness)
-                    
-                    if fitness > particle.best_score:
-                        particle.best_score = fitness
-                        particle.best_position = np.copy(particle.position)
-                    
-                    if fitness > self.global_best_score:
-                        self.global_best_score = fitness
-                        self.global_best_position = np.copy(particle.position)
-                    
-                    r1, r2 = np.random.rand(self.num_features), np.random.rand(self.num_features)
-                    cognitive_component = self.c1 * r1 * (particle.best_position - particle.position)
-                    social_component = self.c2 * r2 * (self.global_best_position - particle.position)
-                    particle.velocity = self.w * particle.velocity + cognitive_component + social_component
-                    
-                    hist_vel_tmp.append(particle.velocity)
-
-                    sigmoid = 1 / (1 + np.exp(-particle.velocity))
-                    probabilities = np.random.rand(self.num_features)
-                    new_position = np.zeros(self.num_features, dtype=int)
-                    selected_indices = np.argsort(sigmoid)[-self.subset_size:]
-                    new_position[selected_indices] = 1
-                    particle.position = new_position
-
-                    # Update feature selection count
-                    self.feature_selection_count += particle.position
-
-                # Calculate the standard deviation of the positions
-                self.history_std.append(np.mean(np.std([particle.position for particle in self.swarm], axis=0)))
+        
+        for iter in range(self.max_iter):
+            iter_start_time = time.time()
+            scores = []
+            hist_vel_tmp = []
+            for particle in self.swarm:
+                fitness = fitness_function(particle.position, self.data)
+                scores.append(fitness)
                 
-                self.hist_velocity.append(np.mean(hist_vel_tmp))
-                avg_score = np.mean(scores)
-                self.history_best.append(self.global_best_score)
-                self.history_avg.append(avg_score)
-                self.hist_exploration.append(normalized_exploration(self.swarm))
-                self.hist_exploitation.append(normalized_exploitation(self.swarm, self.global_best_position))
+                if fitness > particle.best_score:
+                    particle.best_score = fitness
+                    particle.best_position = np.copy(particle.position)
                 
-
+                if fitness > self.global_best_score:
+                    self.global_best_score = fitness
+                    self.global_best_position = np.copy(particle.position)
                 
-                # Write debug messages to the log file
-                iter_end_time = time.time()
-                iter_duration = iter_end_time - iter_start_time
-                log_file.write(f"Iteration {iter + 1}/{self.max_iter}\n")
-                log_file.write(f"Global Best Score: {self.global_best_score}\n")
-                log_file.write(f"Global Best Position: {self.global_best_position}\n")
-                log_file.write(f"Average Score: {avg_score}\n")
-                log_file.write(f"Iteration Duration: {iter_duration:.2f} seconds\n")
-                log_file.write("-" * 50 + "\n")
+                r1, r2 = np.random.rand(self.num_features), np.random.rand(self.num_features)
+                cognitive_component = self.c1 * r1 * (particle.best_position - particle.position)
+                social_component = self.c2 * r2 * (self.global_best_position - particle.position)
+                particle.velocity = self.w * particle.velocity + cognitive_component + social_component
+                
+                hist_vel_tmp.append(particle.velocity)
 
+                sigmoid = 1 / (1 + np.exp(-particle.velocity))
+                probabilities = np.random.rand(self.num_features)
+                new_position = np.zeros(self.num_features, dtype=int)
+                selected_indices = np.argsort(sigmoid)[-self.subset_size:]
+                new_position[selected_indices] = 1
+                particle.position = new_position
 
-                # Early stopping condition
-                if self.early_stop:
-                    if len(self.history_avg) > 1 and abs(self.history_avg[-1] - self.history_avg[-2]) < self.toll:
-                        convergence_iterator += 1
-                    else:
-                        convergence_iterator = 0
+                # Update feature selection count
+                self.feature_selection_count += particle.position
 
-                    if convergence_iterator >= self.threshold:
-                        log_file.write("Early stopping condition reached.\n")
-                        break
+            # Calculate the standard deviation of the positions
+            self.history_std.append(np.mean(np.std([particle.position for particle in self.swarm], axis=0)))
+            
+            self.hist_velocity.append(np.mean(hist_vel_tmp))
+            avg_score = np.mean(scores)
+            self.history_best.append(self.global_best_score)
+            self.history_avg.append(avg_score)
+            self.hist_exploration.append(normalized_exploration(self.swarm))
+            self.hist_exploitation.append(normalized_exploitation(self.swarm, self.global_best_position))
+            
+
+            
+            # Write debug messages to the log file
+            iter_end_time = time.time()
+            iter_duration = iter_end_time - iter_start_time
+
+            # Early stopping condition
+            if self.early_stop:
+                if len(self.history_avg) > 1 and abs(self.history_avg[-1] - self.history_avg[-2]) < self.toll:
+                    convergence_iterator += 1
+                else:
+                    convergence_iterator = 0
+
+                if convergence_iterator >= self.threshold:
+                    print("Early stopping condition reached.\n")
+                    break
 
         
         total_duration = time.time() - start_time
@@ -142,12 +134,6 @@ class PSOFeatureSelection:
             "hist_exploitation" : self.hist_exploitation
         }
 
-
-      
-
-        # Write the total duration to the log file
-        with open("pso_log.txt", "a") as log_file:
-            log_file.write(f"Total Optimization Duration: {total_duration:.2f} seconds\n")
 
 
         return params
