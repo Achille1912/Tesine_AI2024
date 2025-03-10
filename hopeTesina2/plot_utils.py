@@ -2,10 +2,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 
-def plot_results(best_params_dict, run_dict, stability_scores, df, user_swarm_size, user_w, user_c1, user_c2, memory_used, total_duration, seed):
+def plot_results(best_params_dict, run_dict, stability_scores, df, user_swarm_size, user_w, user_c1, user_c2, memory_used, total_duration, seed, user_iterations, user_early_stop, user_threshold, user_toll):
     # Create a single figure with multiple subplots
     fig, axs = plt.subplots(2, 2, figsize=(12, 10))
-    fig.suptitle(f"PSO with swarm_size={user_swarm_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed = {seed}")
+    if user_early_stop:
+        fig.suptitle(f"PSO with swarm_size={user_swarm_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed = {seed}, threshold={user_threshold}, toll={user_toll}")
+    else:
+        fig.suptitle(f"PSO with swarm_size={user_swarm_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed = {seed}, max_iteration={user_iterations}")
 
     # Plot the history of best and average fitness scores
     axs[0, 0].plot(best_params_dict["history_best"], label="Best Solution", color='b')
@@ -33,7 +36,7 @@ def plot_results(best_params_dict, run_dict, stability_scores, df, user_swarm_si
 
     axs[1, 1].bar(range(1, 16), feature_selection_data, color='green')
     axs[1, 1].set_xticks(range(1, 16))
-    axs[1, 1].set_xticklabels(df.columns[top_features_indices], rotation=90, fontsize=8)
+    axs[1, 1].set_xticklabels(df.columns[top_features_indices], rotation=90)
     axs[1, 1].set_title("Top 15 Feature Selection Frequency")
     axs[1, 1].set_ylabel("Selection Count")
 
@@ -42,13 +45,19 @@ def plot_results(best_params_dict, run_dict, stability_scores, df, user_swarm_si
     # Save the first plot
     if not os.path.exists("plots"):
         os.makedirs("plots")
-    fig.savefig(f"plots/PSO Analysis with swarm_size={user_swarm_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed={seed}.png")
+    if user_early_stop:
+        fig.savefig(f"plots/PSO Analysis with swarm_size={user_swarm_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed={seed}, threshold={user_threshold}, toll={user_toll}.png")
+    else:   
+        fig.savefig(f"plots/PSO Analysis with swarm_size={user_swarm_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed={seed}, max_iteration={user_iterations}.png")
 
     plt.show()
 
     # Create a new figure for additional plots
     fig2, axs2 = plt.subplots(2, 2, figsize=(12, 5))
-    fig2.suptitle(f"PSO Analysis with swarm_size={user_swarm_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed={seed}")
+    if user_early_stop:
+        fig2.suptitle(f"PSO Analysis with swarm_size={user_swarm_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed={seed}, threshold={user_threshold}, toll={user_toll}")
+    else:
+        fig2.suptitle(f"PSO Analysis with swarm_size={user_swarm_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed={seed}, max_iteration={user_iterations}")
     # Plot the convergence curve of the best fitness score
     axs2[0][0].plot(best_params_dict["hist_std"], label="std", color='g')
     axs2[0][0].set_xlabel("Iterations")
@@ -82,6 +91,12 @@ def plot_results(best_params_dict, run_dict, stability_scores, df, user_swarm_si
     plt.tight_layout()
 
     # Save the second plot
-    fig2.savefig(f"plots/PSO Analysis with swarm_size={user_swarm_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed={seed}_additional.png")
+    if user_early_stop:
+        fig2.savefig(f"plots/PSO Analysis with swarm_size={user_swarm_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed={seed}, threshold={user_threshold}, toll={user_toll}_additional.png")
+    else:
+        fig2.savefig(f"plots/PSO Analysis with swarm_size={user_swarm_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed={seed},  max_iteration={user_iterations}_additional.png")
 
     plt.show()
+
+
+    

@@ -183,6 +183,13 @@ def validate_seismic_solution(network: WirelessNetwork,
         if red_factor < min_redundancy or red_factor > redundancy_factor:
             return False
     
-
+    # Check redundancy (other way)
+    # total_nodes = len(network.nodes)
+    # total_edges = len(network.get_edge_weights())
+    # rf = (total_edges- (total_nodes -1)) / (total_nodes - 1)
+    # print(rf)
+    # if rf < min_redundancy or rf > redundancy_factor:
+    #     return False
     
+
     return True
