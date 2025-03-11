@@ -19,13 +19,13 @@ def fitness_function(features_selected, data):
     return np.mean(correlation[np.triu_indices_from(correlation, k=1)])
 
 class PSOFeatureSelection:
-    def __init__(self, num_particles, num_features, data, subset_size=30, max_iter=100, 
+    def __init__(self, swarm_size, num_features, data, particle_size, max_iter=100, 
                  w=0.7, c1=2.0, c2=2.0, early_stop=False , threshold=10, toll=0, seed=42):
         self.seed = seed
         np.random.seed(self.seed)
-        self.num_particles = num_particles
+        self.particle_size = particle_size
         self.num_features = num_features
-        self.subset_size = subset_size
+        self.swarm_size = swarm_size
         self.data = data
         self.w = w
         self.c1 = c1
@@ -34,7 +34,7 @@ class PSOFeatureSelection:
         self.early_stop = early_stop
         self.threshold = threshold
         self.toll = toll
-        self.swarm = [Particle(num_features, subset_size, seed) for _ in range(num_particles)]
+        self.swarm = [Particle(num_features, particle_size, seed) for _ in range(swarm_size)]
         self.global_best_position = None
         self.global_best_score = float('-inf')
         self.history_best = []
@@ -81,7 +81,7 @@ class PSOFeatureSelection:
                 sigmoid = 1 / (1 + np.exp(-particle.velocity))
                 probabilities = np.random.rand(self.num_features)
                 new_position = np.zeros(self.num_features, dtype=int)
-                selected_indices = np.argsort(sigmoid)[-self.subset_size:]
+                selected_indices = np.argsort(sigmoid)[-self.particle_size:]
                 new_position[selected_indices] = 1
                 particle.position = new_position
 

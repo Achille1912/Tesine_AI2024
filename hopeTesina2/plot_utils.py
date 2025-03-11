@@ -2,13 +2,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 
-def plot_results(best_params_dict, run_dict, stability_scores, df, user_swarm_size, user_w, user_c1, user_c2, memory_used, total_duration, seed, user_iterations, user_early_stop, user_threshold, user_toll):
+def plot_results(best_params_dict, run_dict, stability_scores, df, user_swarm_size, 
+                 user_w, user_c1, user_c2, memory_used, total_duration, seed, user_iterations, 
+                 user_early_stop, user_threshold, user_toll, particle_size):
     # Create a single figure with multiple subplots
     fig, axs = plt.subplots(2, 2, figsize=(12, 10))
     if user_early_stop:
-        fig.suptitle(f"PSO with swarm_size={user_swarm_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed = {seed}, threshold={user_threshold}, toll={user_toll}")
+        fig.suptitle(f"PSO with swarm_size={user_swarm_size}, particle_size={particle_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed = {seed}, threshold={user_threshold}, toll={user_toll}")
     else:
-        fig.suptitle(f"PSO with swarm_size={user_swarm_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed = {seed}, max_iteration={user_iterations}")
+        fig.suptitle(f"PSO with swarm_size={user_swarm_size}, particle_size={particle_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed = {seed}, max_iteration={user_iterations}")
 
     # Plot the history of best and average fitness scores
     axs[0, 0].plot(best_params_dict["history_best"], label="Best Solution", color='b')
@@ -46,18 +48,18 @@ def plot_results(best_params_dict, run_dict, stability_scores, df, user_swarm_si
     if not os.path.exists("plots"):
         os.makedirs("plots")
     if user_early_stop:
-        fig.savefig(f"plots/PSO Analysis with swarm_size={user_swarm_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed={seed}, threshold={user_threshold}, toll={user_toll}.png")
+        fig.savefig(f"plots/PSO Analysis with swarm_size={user_swarm_size}, particle_size={particle_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed={seed}, threshold={user_threshold}, toll={user_toll}.png")
     else:   
-        fig.savefig(f"plots/PSO Analysis with swarm_size={user_swarm_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed={seed}, max_iteration={user_iterations}.png")
+        fig.savefig(f"plots/PSO Analysis with swarm_size={user_swarm_size}, particle_size={particle_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed={seed}, max_iteration={user_iterations}.png")
 
     plt.show()
 
     # Create a new figure for additional plots
     fig2, axs2 = plt.subplots(2, 2, figsize=(12, 5))
     if user_early_stop:
-        fig2.suptitle(f"PSO Analysis with swarm_size={user_swarm_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed={seed}, threshold={user_threshold}, toll={user_toll}")
+        fig2.suptitle(f"PSO Analysis with swarm_size={user_swarm_size}, particle_size={particle_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed={seed}, threshold={user_threshold}, toll={user_toll}")
     else:
-        fig2.suptitle(f"PSO Analysis with swarm_size={user_swarm_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed={seed}, max_iteration={user_iterations}")
+        fig2.suptitle(f"PSO Analysis with swarm_size={user_swarm_size}, particle_size={particle_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed={seed}, max_iteration={user_iterations}")
     # Plot the convergence curve of the best fitness score
     axs2[0][0].plot(best_params_dict["hist_std"], label="std", color='g')
     axs2[0][0].set_xlabel("Iterations")
@@ -92,9 +94,9 @@ def plot_results(best_params_dict, run_dict, stability_scores, df, user_swarm_si
 
     # Save the second plot
     if user_early_stop:
-        fig2.savefig(f"plots/PSO Analysis with swarm_size={user_swarm_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed={seed}, threshold={user_threshold}, toll={user_toll}_additional.png")
+        fig2.savefig(f"plots/PSO Analysis with swarm_size={user_swarm_size}, particle_size={particle_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed={seed}, threshold={user_threshold}, toll={user_toll}_additional.png")
     else:
-        fig2.savefig(f"plots/PSO Analysis with swarm_size={user_swarm_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed={seed},  max_iteration={user_iterations}_additional.png")
+        fig2.savefig(f"plots/PSO Analysis with swarm_size={user_swarm_size}, particle_size={particle_size}, w={user_w}, c1={user_c1}, c2={user_c2}, seed={seed},  max_iteration={user_iterations}_additional.png")
 
     plt.show()
 

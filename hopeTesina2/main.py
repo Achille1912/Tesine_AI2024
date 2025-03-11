@@ -22,11 +22,11 @@ if __name__ == "__main__":
 
     #------------------------------------------
 
-    num_particles = 50
+    particle_size = 50
     iterations = 100
     RUN = 30
     SEED = 42
-    random.seed(42)
+    random.seed(SEED)
 
     # Loading the dataset
     df = pd.read_csv("DARWIN.csv")
@@ -84,11 +84,12 @@ if __name__ == "__main__":
         run_dict = []
 
         for run in range(RUN):
-            pso = PSOFeatureSelection(num_particles, num_features, data, subset_size=user_swarm_size, max_iter=user_iterations, 
+            pso = PSOFeatureSelection(user_swarm_size, num_features, data, particle_size=particle_size, max_iter=user_iterations, 
                                 w=user_w, c1=user_c1, c2=user_c2, early_stop=user_early_stop,
                                 threshold=user_threshold, toll=user_toll, seed=(SEED+run))            
             params_dict = pso.optimize()
             params_dict["run"] = run
+            params_dict["particle_size"] = particle_size
             run_dict.append(params_dict)
             
             if best_params_dict is None or params_dict["global_best_score"] > best_params_dict["global_best_score"]:
@@ -121,7 +122,10 @@ if __name__ == "__main__":
             #log_file.write(f"avg w {user_w}: {best_params_dict['history_avg']}\n")
 
         # Call the visualization function
-        plot_results(best_params_dict, run_dict, stability_scores, df, user_swarm_size, user_w, user_c1, user_c2, memory_used, total_duration, best_params_dict["run"]+42, user_iterations, user_early_stop, user_threshold, user_toll)
+        plot_results(best_params_dict, run_dict, stability_scores, 
+                     df, user_swarm_size, user_w, user_c1, user_c2, memory_used, 
+                     total_duration, best_params_dict["run"]+SEED, user_iterations, 
+                     user_early_stop, user_threshold, user_toll, particle_size)
 
         # Ask the user if they want to run another test
         repeat = input("Do you want to run another test? (y/n): ").lower()
