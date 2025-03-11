@@ -24,7 +24,7 @@ if __name__ == "__main__":
 
     num_particles = 50
     iterations = 100
-    RUN = 4
+    RUN = 30
     SEED = 42
     random.seed(42)
 

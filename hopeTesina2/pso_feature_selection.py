@@ -112,7 +112,7 @@ class PSOFeatureSelection:
                     convergence_iterator = 0
 
                 if convergence_iterator >= self.threshold:
-                    print("Early stopping condition reached.\n")
+                    print(f"Early stopping condition reached at {iter}.\n")
                     break
 
         
