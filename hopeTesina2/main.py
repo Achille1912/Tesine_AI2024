@@ -77,7 +77,7 @@ if __name__ == "__main__":
             user_toll = params_selection("tollerance", toll_values)
             if user_toll is None: break
 
-        print(f"\n🚀 Running PSO with user_swarm_size={user_swarm_size}, w={user_w}, user_c1={user_c1}, user_c2={user_c2}\n")
+        print(f"\n🚀 Running PSO with user_swarm_size={user_swarm_size}, particle_size={particle_size}, w={user_w}, user_c1={user_c1}, user_c2={user_c2}\n")
         
         best_params_dict = None
 
