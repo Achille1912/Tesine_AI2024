@@ -1,4 +1,4 @@
-2025-03-09 13:14:12 [INFO] === Avvio main.py ===
+2025-03-09 13:14:12 [INFO] === main.py start ===
 2025-03-09 13:14:12 [INFO] 
 Data Summary:
 2025-03-09 13:14:12 [INFO] Training samples: 139
@@ -15,4 +15,4 @@ Data Summary:
 2025-03-09 13:14:13 [INFO] === Inizio Cross Validation sul training set ===
 2025-03-09 13:14:15 [INFO] Cross Validation accuracies per fold: 0.7500, 0.8929, 0.7500, 0.8214, 0.9259
 2025-03-09 13:14:15 [INFO] Mean Cross Validation accuracy: 0.8280
-2025-03-09 13:14:15 [INFO] === Fine main.py ===
+2025-03-09 13:14:15 [INFO] === main.py end ===
