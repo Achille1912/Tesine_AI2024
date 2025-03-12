@@ -9,7 +9,7 @@ import warnings
 import numpy as np
 from sklearn.exceptions import ConvergenceWarning
 
-
+# See https://medium.com/towards-data-science/dropout-in-neural-networks-47a162d621d9 
 class MLPDropout(MLPClassifier):
 
     def __init__(
@@ -229,6 +229,7 @@ class MLPDropout(MLPClassifier):
             self.coefs_ = self._best_coefs
             self.intercepts_ = self._best_intercepts
 
+    
     def _backprop(self, X, y, activations, layer_units, deltas, coef_grads, intercept_grads):
         """Compute the MLP loss function and its corresponding derivatives
         with respect to each parameter: weights and bias vectors.

@@ -24,6 +24,14 @@ def create_output_directory():
 
 def setup_logging(log_file_path):
     """
+    Sets up logging for the application by configuring the root logger with a file
+    handler. The function clears any existing handlers from the root logger, 
+    ensures log messages are formatted with timestamps, log levels, and log 
+    messages.
+
+    :param log_file_path: The file path where log messages will be written.
+    :type log_file_path: str
+    :return: None
     """
     logger = logging.getLogger()  # Recover root logger
     logger.setLevel(logging.INFO)
@@ -41,7 +49,7 @@ def setup_logging(log_file_path):
                                   datefmt="%Y-%m-%d %H:%M:%S")
     file_handler.setFormatter(formatter)
 
-    # Add hadnler to logger
+    # Add handler to logger
     logger.addHandler(file_handler)
 
 

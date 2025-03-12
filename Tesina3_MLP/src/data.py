@@ -40,7 +40,7 @@ def load_and_preprocess_data(config: DataConfig):
     X_test_scaled = scaler.transform(X_test)
 
 
-    # PCA: it uses the percentage of variance given in n_components
+    # PCA: it uses the percentage of variance 
     pca = PCA(n_components=config.n_components, random_state=config.random_state)
     X_train_pca = pca.fit_transform(X_train_scaled)
     X_test_pca = pca.transform(X_test_scaled)

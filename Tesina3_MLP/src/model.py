@@ -65,7 +65,6 @@ def train_model(X_train, y_train):
     )
     '''
 
-    # Training
     mlp.fit(X_train, y_train)
 
     # Compute accuracy on training set
@@ -105,10 +104,10 @@ def cross_validate_model(X, y, n_splits=5):
 
     for fold, (train_index, test_index) in enumerate(skf.split(X, y), start=1):
         print(f"Fold {fold}:")
-        # X is a numpy array and, as such, it uses standard indexing
+        
         X_train_fold = X[train_index]
         X_test_fold = X[test_index]
-        # y is a pandas Series and, as such, it uses .iloc to index by position
+        
         y_train_fold = y.iloc[train_index]
         y_test_fold = y.iloc[test_index]
 
