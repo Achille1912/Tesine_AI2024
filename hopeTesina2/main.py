@@ -22,7 +22,8 @@ if __name__ == "__main__":
 
     #------------------------------------------
 
-    particle_size = 50
+    #particle_size = 22 # 5% of the total number of features
+    particle_size = 22 # 15% of the total number of features
     iterations = 100
     RUN = 30
     SEED = 42
@@ -118,7 +119,7 @@ if __name__ == "__main__":
 
 
         with open("pso_log.txt", "a") as log_file:
-            log_file.write(f"swarm size: {user_swarm_size}: {best_params_dict['history_best']}\n")
+            log_file.write(f"swarm size {user_swarm_size}: {best_params_dict['history_best']}\n")
             #log_file.write(f"avg w {user_w}: {best_params_dict['history_avg']}\n")
 
         # Call the visualization function
