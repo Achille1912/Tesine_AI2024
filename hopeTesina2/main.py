@@ -90,6 +90,7 @@ if __name__ == "__main__":
                                 threshold=user_threshold, toll=user_toll, seed=(SEED+run))            
             params_dict = pso.optimize()
             params_dict["run"] = run
+            params_dict["seed"] = SEED+run
             params_dict["particle_size"] = particle_size
             run_dict.append(params_dict)
             
@@ -119,7 +120,7 @@ if __name__ == "__main__":
 
 
         with open("pso_log.txt", "a") as log_file:
-            log_file.write(f"swarm size {user_swarm_size}: {best_params_dict['history_best']}\n")
+            log_file.write(f"{best_params_dict['seed']} c1 {user_c1}, c2 {user_c2}: {best_params_dict['history_best']}\n")
             #log_file.write(f"avg w {user_w}: {best_params_dict['history_avg']}\n")
 
         # Call the visualization function
