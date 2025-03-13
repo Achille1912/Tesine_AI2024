@@ -70,16 +70,22 @@ def plot_roc_curve(model, X_test, y_test):
 
     y_prob = model.predict_proba(X_test)[:, 1]
 
-    fpr, tpr, thresholds = roc_curve(y_test, y_prob)
+    fpr, tpr, _ = roc_curve(y_test, y_prob)
     roc_auc = roc_auc_score(y_test, y_prob)
 
+    plt.figure()
     plt.plot(fpr, tpr, label=f"ROC curve (AUC = {roc_auc:.2f})")
     plt.plot([0, 1], [0, 1], linestyle="--")
     plt.xlabel("False Positive Rate")
     plt.ylabel("True Positive Rate")
     plt.title("ROC Curve")
     plt.legend(loc="lower right")
-    plt.show()
+
+    if output_path:
+        plt.savefig(output_path, bbox_inches='tight')
+        plt.close()
+    else:
+        plt.show()
 
 
 def boxplot_scores(scores):
@@ -90,10 +96,16 @@ def boxplot_scores(scores):
     :type scores: list or array-like
     :return: None
     """
+    plt.figure()
     plt.boxplot(scores)
     plt.title("Boxplot of Scores")
     plt.ylabel("Accuracy")
-    plt.show()
+
+    if output_path:
+        plt.savefig(output_path, bbox_inches='tight')
+        plt.close()
+    else:
+        plt.show()
 
 
 
