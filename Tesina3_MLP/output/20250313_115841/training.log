@@ -1,0 +1,14 @@
+2025-03-13 11:58:41 [INFO] === main.py start ===
+2025-03-13 11:58:41 [INFO] 
+Data Summary:
+2025-03-13 11:58:41 [INFO] Training samples: 139
+2025-03-13 11:58:41 [INFO] Testing samples: 35
+2025-03-13 11:58:41 [INFO] Number of features: 98
+2025-03-13 11:58:41 [INFO] Class distribution in training set:
+2025-03-13 11:58:41 [INFO]   Class 0: 68 samples (48.92%)
+2025-03-13 11:58:41 [INFO]   Class 1: 71 samples (51.08%)
+2025-03-13 11:58:42 [INFO] Training completed in 0.71 seconds.
+2025-03-13 11:58:42 [INFO] Training accuracy: 0.9784
+2025-03-13 11:58:42 [INFO] Loss curve plot saved to output/20250313_115841/loss_curve.png
+2025-03-13 11:58:42 [INFO] Test accuracy: 0.7429
+2025-03-13 11:58:43 [INFO] Confusion matrix plot saved to output/20250313_115841/confusion_matrix.png
