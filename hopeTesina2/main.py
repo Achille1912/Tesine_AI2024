@@ -8,7 +8,7 @@ from pso_feature_selection import PSOFeatureSelection
 from scenarios import params_selection 
 from plot_utils import plot_results  # Import the visualization function
 
-if __name__ == "__main__":
+def main():
     
     # Definition of available parameters
     swarm_sizes = [20, 50, 100, 200, 500]
@@ -134,3 +134,6 @@ if __name__ == "__main__":
         if repeat != 'y':
             print("🔚 End of execution.")
             break
+
+if __name__ == "__main__":
+    main()
