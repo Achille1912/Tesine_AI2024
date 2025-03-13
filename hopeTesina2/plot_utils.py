@@ -5,6 +5,41 @@ import os
 def plot_results(best_params_dict, run_dict, stability_scores, df, user_swarm_size, 
                  user_w, user_c1, user_c2, memory_used, total_duration, seed, user_iterations, 
                  user_early_stop, user_threshold, user_toll, particle_size):
+    """
+    Plots and saves visual analysis of Particle Swarm Optimization (PSO) performance.
+    The function generates two figures with subplots illustrating PSO dynamics, including
+    fitness scores, velocity, feature selection frequency, swarm diversity, and stability
+    metrics. Additionally, the memory usage and total runtime for the PSO process are 
+    displayed.
+
+    :param best_params_dict: Dictionary containing performance metrics and historical PSO 
+        data, including fields such as "history_best", "history_avg", "global_best_score", 
+        "hist_velocity", "feature_selection_count", "hist_std", "hist_exploration", 
+        and "hist_exploitation".
+    :param run_dict: Dictionary capturing details about different PSO runs or iterations.
+    :param stability_scores: List of stability coefficients between consecutive PSO runs.
+    :param df: Input DataFrame whose columns correspond to features being optimized.
+    :param user_swarm_size: User-defined swarm size representing the number of particles.
+    :param user_w: Inertia weight parameter controlling the influence of particle momentum.
+    :param user_c1: Cognitive coefficient representing the influence of personal best 
+        position.
+    :param user_c2: Social coefficient representing the influence of the group's best 
+        position.
+    :param memory_used: Float value denoting the memory usage during the process, measured 
+        in megabytes (MB).
+    :param total_duration: Float value representing the total time consumed for running 
+        the PSO, measured in seconds.
+    :param seed: Integer value used for initializing random seed, ensuring reproducibility.
+    :param user_iterations: Total number of PSO iterations if early stopping is disabled.
+    :param user_early_stop: Boolean flag indicating whether early stopping criteria 
+        is enabled.
+    :param user_threshold: Threshold value used to trigger early stopping in the PSO 
+        process.
+    :param user_toll: Tolerance level used in conjunction with early stopping criteria.
+    :param particle_size: Integer representing the dimensionality of particle positions.
+
+    :return: None
+    """
     # Create a single figure with multiple subplots
     fig, axs = plt.subplots(2, 2, figsize=(12, 10))
     if user_early_stop:
