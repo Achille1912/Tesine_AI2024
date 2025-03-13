@@ -9,7 +9,17 @@ from utils import normalized_exploitation, normalized_exploration
 
 def fitness_function(features_selected, data):
     """
-    Fitness function based on Spearman correlation between selected features.
+    Evaluates the "fitness" of a given subset of features based on their Spearman correlation.
+    The higher the average absolute correlation between the features, then the higher
+    the fitness value. If no features are selected, the function will return 0
+    to avoid computation on empty subsets.
+
+    :param features_selected: Binary array or list denoting selected features,
+        where 1 indicates a feature is selected and 0 indicates it is not.
+    :param data: Numpy array of shape (n_samples, n_features) representing the dataset.
+        Rows correspond to samples, and columns correspond to features.
+    :return: The average absolute Spearman correlation of the selected features. If
+        no features are selected, returns 0.
     """
     if np.sum(features_selected) == 0:
         return 0  # Avoid empty subsets
