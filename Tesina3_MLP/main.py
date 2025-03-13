@@ -11,7 +11,7 @@ from datetime import datetime
 from src.config import DataConfig
 from src.data import load_and_preprocess_data
 from src.model import train_model, evaluate_model, cross_validate_model
-from utils.visualization import plot_loss_curve, plot_confusion_matrix, plot_roc_curve, boxplot_scores
+from utils.visualization import plot_loss_curve, plot_confusion_matrix, plot_roc_curve, 
 
 
 def create_output_directory():
@@ -106,9 +106,9 @@ def main():
     logging.info(f"Confusion matrix plot saved to {cm_plot_path}")
 
 
-    plot_roc_curve(model, X_test, y_test)
-
-    boxplot_scores(scores=[train_accuracy, test_accuracy])
+    roc_plot_path = os.path.join(output_dir, "roc_curve.png")
+    plot_roc_curve(model, X_test, y_test, output_path=roc_plot_path)
+    logging.info(f"ROC curve plot saved to {roc_plot_path}")
 
     # Cross validation
     logging.info("=== Starting of Cross Validation on training set ===")
