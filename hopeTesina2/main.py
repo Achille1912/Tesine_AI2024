@@ -36,7 +36,7 @@ def main():
     # Handle missing values: replace with column mean
     df.fillna(df.mean(), inplace=True)
 
-    # Normalization (optional)
+    # Normalization
     df = (df - df.min()) / (df.max() - df.min())
 
     # Convert to numpy array for PSO
