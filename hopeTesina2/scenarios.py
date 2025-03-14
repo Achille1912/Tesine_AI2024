@@ -19,7 +19,7 @@ def params_selection(name, values):
         choice = input("Enter the number of your choice (or 'q' to quit): ")
         
         if choice.lower() == 'q':
-            return None  # Signal to terminate execution
+            return None  
         
         if choice.isdigit():
             choice = int(choice) - 1

@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 
-def plot_results(best_params_dict, run_dict, stability_scores, df, user_swarm_size, 
+def plot_results(best_params_dict, stability_scores, df, user_swarm_size, 
                  user_w, user_c1, user_c2, memory_used, total_duration, seed, user_iterations, 
                  user_early_stop, user_threshold, user_toll, particle_size):
     """
@@ -16,7 +16,6 @@ def plot_results(best_params_dict, run_dict, stability_scores, df, user_swarm_si
         data, including fields such as "history_best", "history_avg", "global_best_score", 
         "hist_velocity", "feature_selection_count", "hist_std", "hist_exploration", 
         and "hist_exploitation".
-    :param run_dict: Dictionary capturing details about different PSO runs or iterations.
     :param stability_scores: List of stability coefficients between consecutive PSO runs.
     :param df: Input DataFrame whose columns correspond to features being optimized.
     :param user_swarm_size: User-defined swarm size representing the number of particles.

@@ -1,12 +1,11 @@
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
 import random
 import os
 import psutil
 from pso_feature_selection import PSOFeatureSelection
 from scenarios import params_selection 
-from plot_utils import plot_results  # Import the visualization function
+from plot_utils import plot_results  
 
 def main():
     
@@ -24,7 +23,6 @@ def main():
 
     #particle_size = 22 # 5% of the total number of features
     particle_size = 22 # 15% of the total number of features
-    iterations = 100
     RUN = 30
     SEED = 42
     random.seed(SEED)
@@ -121,10 +119,9 @@ def main():
 
         with open("pso_log.txt", "a") as log_file:
             log_file.write(f"{best_params_dict['seed']} c1 {user_c1}, c2 {user_c2}: {best_params_dict['history_best']}\n")
-            #log_file.write(f"avg w {user_w}: {best_params_dict['history_avg']}\n")
 
         # Call the visualization function
-        plot_results(best_params_dict, run_dict, stability_scores, 
+        plot_results(best_params_dict, stability_scores, 
                      df, user_swarm_size, user_w, user_c1, user_c2, memory_used, 
                      total_duration, best_params_dict["run"]+SEED, user_iterations, 
                      user_early_stop, user_threshold, user_toll, particle_size)

@@ -89,7 +89,6 @@ class PSOFeatureSelection:
                 hist_vel_tmp.append(particle.velocity)
 
                 sigmoid = 1 / (1 + np.exp(-particle.velocity))
-                probabilities = np.random.rand(self.num_features)
                 new_position = np.zeros(self.num_features, dtype=int)
                 selected_indices = np.argsort(sigmoid)[-self.particle_size:]
                 new_position[selected_indices] = 1
@@ -110,10 +109,6 @@ class PSOFeatureSelection:
             
 
             
-            # Write debug messages to the log file
-            iter_end_time = time.time()
-            iter_duration = iter_end_time - iter_start_time
-
             # Early stopping condition
             if self.early_stop:
                 if len(self.history_avg) > 1 and abs(self.history_avg[-1] - self.history_avg[-2]) < self.toll:

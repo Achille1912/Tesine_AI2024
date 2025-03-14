@@ -38,7 +38,7 @@ class Particle:
         self.particle_size = particle_size
         self.position = np.zeros(num_features, dtype=int)
         selected_indices = np.random.choice(num_features, particle_size, replace=False)
-        self.position[selected_indices] = 1  # Selezioniamo esattamente subset_size feature
+        self.position[selected_indices] = 1  
         self.velocity = np.random.uniform(-1, 1, num_features)
         self.best_position = np.copy(self.position)
         self.best_score = float('-inf')

@@ -33,5 +33,5 @@ def normalized_exploration(population):
         hamming_distance(population[i].position, population[j].position)
         for i in range(num_particles) for j in range(i + 1, num_particles)
     ])
-    return mean_pairwise_distance / dim  # Normalize between 0 and 1
+    return mean_pairwise_distance / dim 
 
