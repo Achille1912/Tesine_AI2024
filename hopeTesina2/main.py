@@ -19,7 +19,7 @@ def main():
     threshold_values = [10,20,30]
     toll_values = [0.0001, 0.00001, 0.000001]
 
-    #------------------------------------------
+    #---------------------------------------
 
     #particle_size = 22 # 5% of the total number of features
     particle_size = 22 # 15% of the total number of features
@@ -96,7 +96,6 @@ def main():
                 best_params_dict = params_dict
             print(f"Run {run+1}/{RUN} completed.") 
         
-        # Calculate stability between runs
         stability_scores = []
         for i in range(1, len(run_dict)):
             stability = np.mean(run_dict[i]["history_avg"]) / np.mean(run_dict[i-1]["history_avg"])
