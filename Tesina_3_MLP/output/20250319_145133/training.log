@@ -1,0 +1,19 @@
+2025-03-19 14:51:33 [INFO] === main.py start ===
+2025-03-19 14:51:33 [INFO] 
+Data Summary:
+2025-03-19 14:51:33 [INFO] Training samples: 139
+2025-03-19 14:51:33 [INFO] Testing samples: 35
+2025-03-19 14:51:33 [INFO] Number of features: 98
+2025-03-19 14:51:33 [INFO] Class distribution in training set:
+2025-03-19 14:51:33 [INFO]   Class 0: 68 samples (48.92%)
+2025-03-19 14:51:33 [INFO]   Class 1: 71 samples (51.08%)
+2025-03-19 14:51:34 [INFO] Training completed in 0.50 seconds.
+2025-03-19 14:51:34 [INFO] Training accuracy: 0.9784
+2025-03-19 14:51:34 [INFO] Loss curve plot saved to output/20250319_145133/loss_curve.png
+2025-03-19 14:51:34 [INFO] Test accuracy: 0.7429
+2025-03-19 14:51:34 [INFO] Confusion matrix plot saved to output/20250319_145133/confusion_matrix.png
+2025-03-19 14:51:34 [INFO] ROC curve plot saved to output/20250319_145133/roc_curve.png
+2025-03-19 14:51:34 [INFO] === Starting of Cross Validation on training set ===
+2025-03-19 14:51:36 [INFO] Cross Validation accuracies per fold: 0.6786, 0.9286, 0.7143, 0.8929, 0.8519
+2025-03-19 14:51:36 [INFO] Mean Cross Validation accuracy: 0.8132
+2025-03-19 14:51:36 [INFO] === main.py end ===

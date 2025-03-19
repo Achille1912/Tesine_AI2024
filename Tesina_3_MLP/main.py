@@ -11,7 +11,7 @@ from datetime import datetime
 from src.config import DataConfig
 from src.data import load_and_preprocess_data
 from src.model import train_model, evaluate_model, cross_validate_model
-from utils.visualization import plot_loss_curve, plot_confusion_matrix, plot_roc_curve, 
+from utils.visualization import plot_loss_curve, plot_confusion_matrix, plot_roc_curve
 
 
 def create_output_directory():

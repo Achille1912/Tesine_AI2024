@@ -66,7 +66,6 @@ class PSOFeatureSelection:
 
         
         for iter in range(self.max_iter):
-            iter_start_time = time.time()
             scores = []
             hist_vel_tmp = []
             for particle in self.swarm:

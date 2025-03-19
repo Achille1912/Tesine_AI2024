@@ -27,8 +27,7 @@ def calculate_edge_cost(node1: Node, node2: Node) -> float:
     avg_power_capacity = (node1.power_capacity + node2.power_capacity)/2
     power_factor = 1.0 + (power_requirement / avg_power_capacity)
 
-    cost = base_cost * power_factor 
-    return cost
+    return base_cost * power_factor 
     
 
 

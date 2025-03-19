@@ -63,7 +63,7 @@ def plot_confusion_matrix(model, X_test, y_test, output_path=None):
     plt.close()
 
 
-def plot_roc_curve(model, X_test, y_test):
+def plot_roc_curve(model, X_test, y_test, output_path):
     """
     Displays the ROC curve and calculates the AUC for the given model.
     """
