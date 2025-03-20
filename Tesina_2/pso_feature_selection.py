@@ -176,13 +176,18 @@ class PSOFeatureSelection:
             
 
             
-            # Early stopping condition
-            if self.early_stop:
+            # Early stopping condition check
+            if self.early_stop: # If the early stopping is enabled
+
+                # Ensure there are at least two recorded average values before checking for convergence
+                # Compare the last two values in the history of averages
+                # If the absolute difference between them is smaller than the tolerance `toll`, it indicates little to no improvement
                 if len(self.history_avg) > 1 and abs(self.history_avg[-1] - self.history_avg[-2]) < self.toll:
                     convergence_iterator += 1
                 else:
                     convergence_iterator = 0
-
+                    
+                # If the number of consecutive iterations with minimal variation exceeds the `threshold`
                 if convergence_iterator >= self.threshold:
                     print(f"Early stopping condition reached at {iter}.\n")
                     break
