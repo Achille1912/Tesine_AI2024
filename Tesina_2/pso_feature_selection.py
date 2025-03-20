@@ -87,13 +87,23 @@ class PSOFeatureSelection:
                 
                 hist_vel_tmp.append(particle.velocity)
 
+                # Binarize the particle's velocity to determine which features to select:
+                # 1. Compute the logistic sigmoid for each velocity component, mapping real values to (0,1).
                 sigmoid = 1 / (1 + np.exp(-particle.velocity))
+                # 2. Initialize a new position vector of zeros (no features selected).
                 new_position = np.zeros(self.num_features, dtype=int)
+                # 3. Sort the sigmoid values and take the top `particle_size` indices (the highest probabilities).
                 selected_indices = np.argsort(sigmoid)[-self.particle_size:]
+                # 4. Set those indices to 1 (i.e., select those features).
                 new_position[selected_indices] = 1
+                # 5. Update the particle's position with the new binary vector.
                 particle.position = new_position
 
-                # Update feature selection count
+                # Increase the global count of how many times each feature is selected.
+                # Here, 'particle.position' is a binary vector indicating which features
+                # this particle selected during the current iteration. 
+                # By adding it, we accumulate the frequency with which 
+                # each feature is chosenacross all particles and iterations.
                 self.feature_selection_count += particle.position
 
             # Calculate the standard deviation of the positions
