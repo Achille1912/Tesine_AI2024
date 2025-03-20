@@ -31,6 +31,64 @@ def fitness_function(features_selected, data):
 class PSOFeatureSelection:
     def __init__(self, swarm_size, num_features, data, particle_size, max_iter=100, 
                  w=0.7, c1=2.0, c2=2.0, early_stop=False , threshold=10, toll=0, seed=42):
+        """
+        - Initializes the configuration parameters of the PSO algorithm for feature selection.
+        - Creates the swarm (a list of particles), each with a binary position and an initial velocity.
+        - Sets up the variables that track the progress of the optimization (global best, 
+           fitness history, feature selection counts, etc.).
+
+        Attributes
+        ----------
+        seed : int
+            Seed for the random number generator, ensuring reproducible initialization of velocities
+            and positions.
+        particle_size : int
+            Number of features each particle should select (i.e., how many bits are set to 1 
+            in the binary vector).
+        num_features : int
+            Total number of available features.
+        swarm_size : int
+            Number of particles in the swarm.
+        data : np.ndarray
+            The input data, used for fitness evaluations.
+        w : float
+            Inertia weight in the PSO velocity update equation.
+        c1 : float
+            Cognitive coefficient in PSO (how strongly a particle follows its own personal best).
+        c2 : float
+            Social coefficient in PSO (how strongly a particle follows the global best).
+        max_iter : int
+            Maximum number of PSO iterations.
+        early_stop : bool
+            Flag that controls whether to trigger early stopping. when improvements in average fitness
+            remain below a certain threshold (`toll`) for a set number of consecutive iterations (`threshold`).
+        threshold : int
+            Number of consecutive low-improvement iterations required to stop early.
+        toll : float
+            Tolerance for changes in average fitness. If the absolute difference between the
+            current and previous average fitness is below this value, the convergence counter increases (see below).
+        swarm : list[Particle]
+            List of particles, each with a binary position, velocity, personal best score, etc.
+        global_best_position : np.ndarray
+            The binary position corresponding to the best global solution found by the swarm.
+        global_best_score : float
+            Best (highest) fitness score found by any particle in the swarm so far.
+        history_best : list[float]
+            Records the global best score at each iteration.
+        history_avg : list[float]
+            Records the average fitness of the swarm at each iteration.
+        history_std : list[float]
+            Records the standard deviation of the particles' positions per iteration 
+        feature_selection_count : np.ndarray
+            Array of length `num_features` that accumulates how many times each feature
+            has been selected across all particles and iterations.
+        hist_velocity : list[float]
+            Tracks the average velocity of the swarm at each iteration.
+        hist_exploration : list[float]
+            Stores the normalized exploration metric at each iteration.
+        hist_exploitation : list[float]
+            Stores the normalized exploitation metric at each iteration.
+        """
         self.seed = seed
         np.random.seed(self.seed)
         self.particle_size = particle_size
@@ -103,7 +161,7 @@ class PSOFeatureSelection:
                 # Here, 'particle.position' is a binary vector indicating which features
                 # this particle selected during the current iteration. 
                 # By adding it, we accumulate the frequency with which 
-                # each feature is chosenacross all particles and iterations.
+                # each feature is chosen across all particles and iterations.
                 self.feature_selection_count += particle.position
 
             # Calculate the standard deviation of the positions
