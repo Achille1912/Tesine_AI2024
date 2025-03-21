@@ -21,8 +21,8 @@ def main():
 
     #---------------------------------------
 
-    #particle_size = 22 # 5% of the total number of features
-    particle_size = 22 # 15% of the total number of features
+    #particle_size = 45 # 10% of the total number of features
+    particle_size = 22 # 5% of the total number of features
     RUN = 30
     SEED = 42
     random.seed(SEED)
