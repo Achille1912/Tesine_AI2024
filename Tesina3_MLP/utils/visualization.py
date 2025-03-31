@@ -75,7 +75,7 @@ def plot_accuracy_boxplots(train_accuracies, test_accuracies, output_path):
     plt.close()
 
 
-def plot_mean_roc_curve(fprs_list, tprs_list, aucs_list, output_path=None):
+def plot_mean_roc_curve(fprs_list, tprs_list, aucs_list, output_path=None, num_runs=None):
     """
     Plot mean ROC curve over multiple runs.
     """
@@ -85,7 +85,6 @@ def plot_mean_roc_curve(fprs_list, tprs_list, aucs_list, output_path=None):
     tprs_interpolated = []
     for fpr, tpr in zip(fprs_list, tprs_list):
         tpr_interp = np.interp(mean_fpr, fpr, tpr)
-       
         tpr_interp[0] = 0.0
         tprs_interpolated.append(tpr_interp)
 
@@ -117,7 +116,9 @@ def plot_mean_roc_curve(fprs_list, tprs_list, aucs_list, output_path=None):
 
     plt.plot([0, 1], [0, 1], color='red', linestyle='--', label='Random')
 
-    plt.title("Mean ROC Curve (30 runs)")
+    title = f"Mean ROC Curve ({num_runs} runs)" if num_runs else "Mean ROC Curve"
+    plt.title(title)
+    
     plt.xlabel("False Positive Rate")
     plt.ylabel("True Positive Rate")
     plt.legend(loc='lower right')
