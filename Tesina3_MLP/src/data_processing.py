@@ -68,7 +68,7 @@ def print_data_summary(X_train, X_test, y_train, y_test):
 
     summary_message = (
         f"\n **Dataset Summary**\n"
-        f"──────────────────────────\n"
+        f"--------------------------\n"
         f" Training samples: {train_samples}\n"
         f" Testing samples: {test_samples}\n"
         f" Number of features: {num_features}\n\n"
@@ -88,7 +88,7 @@ def plot_feature_distribution(X, y, title, pca_model=None):
 
     fig = plt.figure(figsize=(10, 7), dpi=150)
 
-    custom_palette = {"C": "blue", "P": "red"} 
+    custom_palette = {0: "blue", 1: "red"}
 
     if pca_model:
         if X.shape[1] < 2:
