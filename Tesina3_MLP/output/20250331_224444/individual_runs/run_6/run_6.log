@@ -1,0 +1,31 @@
+2025-03-31 22:45:39 [INFO]  Dataset loading...
+2025-03-31 22:45:39 [INFO] Original dataset: 174 samples, 450 features.
+2025-03-31 22:45:39 [INFO]  PCA applied: Reduction from 450 to 100 features.
+2025-03-31 22:45:39 [INFO]  Total variance explained by PCA: 97.01%
+2025-03-31 22:45:40 [INFO] 
+ **Dataset Summary**
+--------------------------
+ Training samples: 139
+ Testing samples: 35
+ Number of features: 100
+
+ **Class distribution (Training set):**
+    Class 0: 68 samples (48.92%)
+    Class 1: 71 samples (51.08%)
+
+ **Class distribution (Test set):**
+    Class 0: 17 samples (48.57%)
+    Class 1: 18 samples (51.43%)
+2025-03-31 22:45:40 [INFO] Training MLP with random_state=47, hidden_layer_sizes=(400, 200), activation=tanh, solver=adam, alpha=0.001, learning_rate=adaptive, learning_rate_init=0.1, validation_fraction=0.1, n_iter_no_change=10, early_stopping=True, shuffle=True, verbose=True
+2025-03-31 22:45:41 [INFO]     Fold 1/5 in corso...
+2025-03-31 22:45:41 [INFO]     Fold 1/5 accuracy = 0.8214
+2025-03-31 22:45:41 [INFO]     Fold 2/5 in corso...
+2025-03-31 22:45:42 [INFO]     Fold 2/5 accuracy = 0.6071
+2025-03-31 22:45:42 [INFO]     Fold 3/5 in corso...
+2025-03-31 22:45:42 [INFO]     Fold 3/5 accuracy = 0.7857
+2025-03-31 22:45:42 [INFO]     Fold 4/5 in corso...
+2025-03-31 22:45:43 [INFO]     Fold 4/5 accuracy = 0.7143
+2025-03-31 22:45:43 [INFO]     Fold 5/5 in corso...
+2025-03-31 22:45:43 [INFO]     Fold 5/5 accuracy = 0.7407
+2025-03-31 22:45:43 [INFO]  Cross-validation folds=5: mean_acc=0.7339
+2025-03-31 22:45:43 [INFO] === Risultati run 6/30 con seed=47 ===
