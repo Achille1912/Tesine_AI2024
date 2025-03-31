@@ -1,0 +1,33 @@
+2025-03-31 22:44:44 [INFO] === Start experiment with 30 runs ===
+2025-03-31 22:45:18 [INFO] Configurazione salvata in: output\20250331_224444\config.json
+2025-03-31 22:45:18 [INFO] --- Avvio run 1/30 con random_state=42 ---
+2025-03-31 22:45:22 [INFO] --- Avvio run 2/30 con random_state=43 ---
+2025-03-31 22:45:26 [INFO] --- Avvio run 3/30 con random_state=44 ---
+2025-03-31 22:45:30 [INFO] --- Avvio run 4/30 con random_state=45 ---
+2025-03-31 22:45:35 [INFO] --- Avvio run 5/30 con random_state=46 ---
+2025-03-31 22:45:39 [INFO] --- Avvio run 6/30 con random_state=47 ---
+2025-03-31 22:45:43 [INFO] --- Avvio run 7/30 con random_state=48 ---
+2025-03-31 22:45:48 [INFO] --- Avvio run 8/30 con random_state=49 ---
+2025-03-31 22:45:52 [INFO] --- Avvio run 9/30 con random_state=50 ---
+2025-03-31 22:45:56 [INFO] --- Avvio run 10/30 con random_state=51 ---
+2025-03-31 22:46:00 [INFO] --- Avvio run 11/30 con random_state=52 ---
+2025-03-31 22:46:04 [INFO] --- Avvio run 12/30 con random_state=53 ---
+2025-03-31 22:46:08 [INFO] --- Avvio run 13/30 con random_state=54 ---
+2025-03-31 22:46:12 [INFO] --- Avvio run 14/30 con random_state=55 ---
+2025-03-31 22:46:17 [INFO] --- Avvio run 15/30 con random_state=56 ---
+2025-03-31 22:46:21 [INFO] --- Avvio run 16/30 con random_state=57 ---
+2025-03-31 22:46:24 [INFO] --- Avvio run 17/30 con random_state=58 ---
+2025-03-31 22:46:28 [INFO] --- Avvio run 18/30 con random_state=59 ---
+2025-03-31 22:46:32 [INFO] --- Avvio run 19/30 con random_state=60 ---
+2025-03-31 22:46:37 [INFO] --- Avvio run 20/30 con random_state=61 ---
+2025-03-31 22:46:41 [INFO] --- Avvio run 21/30 con random_state=62 ---
+2025-03-31 22:46:45 [INFO] --- Avvio run 22/30 con random_state=63 ---
+2025-03-31 22:46:49 [INFO] --- Avvio run 23/30 con random_state=64 ---
+2025-03-31 22:46:52 [INFO] --- Avvio run 24/30 con random_state=65 ---
+2025-03-31 22:46:57 [INFO] --- Avvio run 25/30 con random_state=66 ---
+2025-03-31 22:47:00 [INFO] --- Avvio run 26/30 con random_state=67 ---
+2025-03-31 22:47:05 [INFO] --- Avvio run 27/30 con random_state=68 ---
+2025-03-31 22:47:08 [INFO] --- Avvio run 28/30 con random_state=69 ---
+2025-03-31 22:47:12 [INFO] --- Avvio run 29/30 con random_state=70 ---
+2025-03-31 22:47:17 [INFO] --- Avvio run 30/30 con random_state=71 ---
+2025-03-31 22:47:22 [INFO] === CV Mean Accuracy su 30 run: 0.7704 +/- 0.0395 ===
