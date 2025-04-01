@@ -51,7 +51,7 @@ def main():
        os.makedirs(run_dir, exist_ok=True)
        run_log_file = os.path.join(run_dir, f"run_{i+1}.log")
 
-       logging.info(f"--- Avvio run {i + 1}/{NUM_RUNS} con random_state={42+i} ---")
+       logging.info(f"--- Starting run {i + 1}/{NUM_RUNS} with random_state={42+i} ---")
 
        setup_logging(run_log_file, console_output=False)
 
@@ -91,7 +91,7 @@ def main():
        if results["cv_mean_accuracy"] is not None:
            cv_means_all_runs.append(results["cv_mean_accuracy"])
        else:
-           logging.info("Nessuna cross-validation eseguita in questa run.")
+           logging.info("Cross-validation not executed in this run.")
 
      
        test_accuracies.append(results["test_accuracy"])
