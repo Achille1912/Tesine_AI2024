@@ -29,7 +29,7 @@ def main():
 
    with open(config_path, "w") as f:
        json.dump(user_config, f, indent=4)
-   logging.info(f"Configurazione salvata in: {config_path}")
+   logging.info(f"Configuration saved in: {config_path}")
 
 
    individual_runs_dir = os.path.join(output_dir, "individual_runs")
