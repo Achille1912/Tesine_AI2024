@@ -18,7 +18,7 @@ def load_and_preprocess_data(config: DataConfig):
     df = pd.read_csv(config.dataset_path)
 
     X = df.drop(columns=['ID', 'class'])
-    y = (df['class'] == 'P').astype(int)  # 'P' -> 1, 'C' -> 0
+    y = (df['class'] == 'P').astype(int)  # 'P' -> 1, 'H' -> 0
 
     num_features_before = X.shape[1]  
 
